@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block title %}
+Patient Reports
+{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+
+<div class="appointment-header">
+
+    <div>
+
+        <h2 class="section-title mb-1">
+            Patient Reports
+        </h2>
+
+        <p class="text-muted mb-0">
+            View and manage medical reports recorded for patients.
+        </p>
+
+    </div>
+
+
+    <div class="appointment-header-actions">
+
+        <a href="{{ url_for('receptionist.dashboard') }}" class="btn btn-primary">
+
+            <i class="bi bi-arrow-left me-1"></i>
+            Back to Dashboard
+
+        </a>
+
+    </div>
+
+</div>
+
+<!-- Reports Table -->
+
+<div class="appointment-table-card">
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Patient</th>
+                        <th>Doctor</th>
+                        <th>Report</th>
+                        <th>Report Date</th>
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% if reports %}
+
+                    {% for report in reports %}
+
+                    <tr>
+
+                        <td>
+                            {{ report.patient_name }}
+                        </td>
+
+
+                        <td>
+                            {{ report.doctor_name }}
+                        </td>
+
+
+                        <td>
+                            {{ report.report_title }}
+                        </td>
+
+
+                        <td>
+                            {{ report.report_date }}
+                        </td>
+
+
+                        <td>
+
+                            {% if report.file_path %}
+
+                            <a href="{{ url_for(
+                                    'receptionist.view_report',
+                                    report_id=report.report_id
+                                ) }}" class="btn btn-sm btn-primary">
+                                <i class="bi bi-file-earmark-medical me-1"></i>
+                                View Report
+                            </a>
+
+                            {% else %}
+
+                            <span class="text-muted">
+                                No File
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+
+                    {% else %}
+
+                    <tr>
+
+                        <td colspan="5" class="text-center text-muted py-5">
+                            No patient reports found.
+                        </td>
+
+                    </tr>
+
+                    {% endif %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

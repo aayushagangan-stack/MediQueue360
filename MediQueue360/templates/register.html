@@ -1,0 +1,292 @@
+{% extends "base.html" %}
+
+{% block title %}
+Register | MediQueue 360
+{% endblock %}
+
+{% block content %}
+
+<section class="register-section">
+
+    <div class="register-bubble register-bubble-one"></div>
+    <div class="register-bubble register-bubble-two"></div>
+    <div class="register-bubble register-bubble-three"></div>
+    <div class="register-bubble register-bubble-four"></div>
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-12">
+
+                <div class="register-card">
+
+                    <div class="register-icon">
+                        <i class="bi bi-person-plus-fill"></i>
+                    </div>
+
+                    <div class="text-center register-heading">
+
+                        <span class="register-tag">
+                            CREATE ACCOUNT
+                        </span>
+
+                        <h1>
+                            Join MediQueue 360
+                        </h1>
+
+                        <p>
+                            Create your patient account and manage your clinic appointments with ease.
+                        </p>
+
+                    </div>
+
+                    <form method="POST">
+
+                        <div class="register-field">
+
+                            <label for="full_name">
+                                Full Name
+                            </label>
+
+                            <div class="register-input-wrapper">
+
+                                <i class="bi bi-person"></i>
+
+                                <input type="text" id="full_name" name="full_name" placeholder="Enter your full name"
+                                    required>
+
+                            </div>
+
+                        </div>
+
+                        <div class="register-field">
+
+                            <label for="email">
+                                Email Address
+                            </label>
+
+                            <div class="register-input-wrapper">
+
+                                <i class="bi bi-envelope"></i>
+
+                                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+                            </div>
+
+                        </div>
+
+                        <div class="register-field">
+
+                            <label for="phone">
+                                Phone Number
+                            </label>
+
+                            <div class="register-input-wrapper">
+
+                                <i class="bi bi-telephone"></i>
+
+                                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+
+                            </div>
+
+                        </div>
+
+                        <div class="register-field">
+
+                            <label for="password">
+                                Password
+                            </label>
+
+                            <div class="register-input-wrapper">
+
+                                <i class="bi bi-lock"></i>
+
+                                <input type="password" id="password" name="password" placeholder="Create a password"
+                                    minlength="6" required>
+
+                                <button type="button" class="register-password-toggle"
+                                    onclick="toggleRegisterPassword('password', this)" aria-label="Show password">
+
+                                    <i class="bi bi-eye"></i>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <div class="register-field">
+
+                            <label for="confirm_password">
+                                Confirm Password
+                            </label>
+
+                            <div class="register-input-wrapper">
+
+                                <i class="bi bi-shield-lock"></i>
+
+                                <input type="password" id="confirm_password" name="confirm_password"
+                                    placeholder="Re-enter your password" minlength="6" required>
+
+                                <button type="button" class="register-password-toggle"
+                                    onclick="toggleRegisterPassword('confirm_password', this)"
+                                    aria-label="Show password">
+
+                                    <i class="bi bi-eye"></i>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <div class="patient-register-details">
+
+                            <div class="register-field">
+
+                                <label for="date_of_birth">
+                                    Date of Birth
+                                </label>
+
+                                <div class="register-input-wrapper">
+
+                                    <i class="bi bi-calendar"></i>
+
+                                    <input type="date" id="date_of_birth" name="date_of_birth">
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="register-field">
+
+                                <label for="gender">
+                                    Gender
+                                </label>
+
+                                <div class="register-input-wrapper">
+
+                                    <select id="gender" name="gender" class="form-select">
+
+                                        <option value="">
+                                            Select Gender
+                                        </option>
+
+                                        <option value="Male">
+                                            Male
+                                        </option>
+
+                                        <option value="Female">
+                                            Female
+                                        </option>
+
+                                        <option value="Other">
+                                            Other
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="register-field">
+
+                                <label for="address">
+                                    Address
+                                </label>
+
+                                <div class="register-input-wrapper">
+
+                                    <i class="bi bi-geo-alt"></i>
+
+                                    <input type="text" id="address" name="address" placeholder="Enter your address">
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="register-field">
+
+                                <label for="emergency_contact">
+                                    Emergency Contact
+                                </label>
+
+                                <div class="register-input-wrapper">
+
+                                    <i class="bi bi-telephone-plus"></i>
+
+                                    <input type="tel" id="emergency_contact" name="emergency_contact"
+                                        placeholder="Enter emergency contact number">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <button type="submit" class="register-button">
+
+                            Create Account
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </button>
+
+                    </form>
+
+                    <div class="register-login">
+
+                        <p>
+                            Already have an account?
+                        </p>
+
+                        <a href="{{ url_for('auth.login') }}">
+                            Login here
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<script>
+
+    function toggleRegisterPassword(inputId, button) {
+
+        const passwordInput = document.getElementById(inputId);
+        const icon = button.querySelector("i");
+
+        if (passwordInput.type === "password") {
+
+            passwordInput.type = "text";
+
+            icon.classList.remove("bi-eye");
+            icon.classList.add("bi-eye-slash");
+
+        } else {
+
+            passwordInput.type = "password";
+
+            icon.classList.remove("bi-eye-slash");
+            icon.classList.add("bi-eye");
+
+        }
+
+    }
+
+</script>
+
+{% endblock %}

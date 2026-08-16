@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+
+{% block title %}
+Pending Appointments
+{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+
+<div class="appointment-header">
+
+<div>
+
+    <h2 class="section-title mb-1">
+        Pending Appointments
+    </h2>
+
+    <p class="text-muted mb-0">
+        Review appointment requests and assign consultation times.
+    </p>
+
+</div>
+
+
+<div class="appointment-header-actions">
+
+    <a href="{{ url_for('receptionist.dashboard') }}"
+       class="btn btn-primary">
+
+        <i class="bi bi-arrow-left me-1"></i>
+        Back to Dashboard
+
+    </a>
+
+</div>
+
+</div>
+
+<!-- Appointments Table -->
+
+<div class="appointment-table-card">
+
+
+<div class="card-body">
+
+    <div class="table-responsive">
+
+        <table class="table table-hover">
+
+            <thead>
+
+                <tr>
+
+                    <th>Patient</th>
+                    <th>Doctor</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% if appointments %}
+
+                    {% for appointment in appointments %}
+
+                    <tr>
+
+                        <td>
+                            {{ appointment.patient_name }}
+                        </td>
+
+
+                        <td>
+                            {{ appointment.doctor_name }}
+                        </td>
+
+
+                        <td>
+                            {{ appointment.appointment_date }}
+                        </td>
+
+
+                        <td>
+
+                            {% if appointment.appointment_time %}
+
+                                {{ appointment.appointment_time }}
+
+                            {% else %}
+
+                                <span class="text-muted">
+                                    Not Assigned
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <td>
+
+                            {% if appointment.status == "Pending" %}
+
+                                <span class="badge bg-warning text-dark status-badge">
+                                    Pending
+                                </span>
+
+                            {% elif appointment.status == "Confirmed" %}
+
+                                <span class="badge bg-success status-badge">
+                                    Confirmed
+                                </span>
+
+                            {% else %}
+
+                                <span class="badge bg-secondary status-badge">
+                                    {{ appointment.status }}
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <td>
+
+                            {% if appointment.status == "Pending" %}
+
+                                <a
+                                    href="{{ url_for(
+                                        'receptionist.assign_time',
+                                        appointment_id=appointment.appointment_id
+                                    ) }}"
+                                    class="btn btn-primary btn-sm"
+                                >
+                                    Assign Time
+                                </a>
+
+                            {% else %}
+
+                                <span class="text-muted">
+                                    No action
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <tr>
+
+                        <td
+                            colspan="6"
+                            class="text-center text-muted py-5"
+                        >
+                            No Pending Appointments
+                        </td>
+
+                    </tr>
+
+                {% endif %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</div>
+
+{% endblock %}

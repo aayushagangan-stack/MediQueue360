@@ -1,0 +1,252 @@
+{% extends "base.html" %}
+
+{% block title %}
+Upload Medical Report
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- Page Header -->
+
+    <div class="card border-0 shadow-sm rounded-4 mb-4">
+
+        <div class="card-body p-4">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <div>
+                    <h2 class="section-title mb-1">
+                        Upload Medical Report
+                    </h2>
+
+                    <p class="text-muted mb-0">
+                        Upload a medical report for the selected patient.
+                    </p>
+                </div>
+
+                <div class="ms-3">
+
+                    <a href="{{ url_for('doctor.records') }}" class="btn btn-primary px-4">
+                        <i class="bi bi-arrow-left me-1"></i>
+                        Back
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Patient & Consultation Summary -->
+
+    <div class="card border-0 shadow-sm rounded-4 mb-4">
+
+        <div class="card-body p-4">
+
+            <h4 class="mb-4">
+                Patient & Consultation
+            </h4>
+
+            <div class="row g-3">
+
+                <!-- Patient -->
+
+                <div class="col-md-6">
+
+                    <div class="border rounded-3 p-3">
+
+                        <small class="text-muted">
+                            Patient
+                        </small>
+
+                        <h6 class="mt-1 mb-0">
+                            {{ visit.patient_name }}
+                        </h6>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Doctor -->
+
+                <div class="col-md-6">
+
+                    <div class="border rounded-3 p-3">
+
+                        <small class="text-muted">
+                            Doctor
+                        </small>
+
+                        <h6 class="mt-1 mb-0">
+                            {{ visit.doctor_name }}
+                        </h6>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Diagnosis -->
+
+                <div class="col-md-6">
+
+                    <div class="border rounded-3 p-3">
+
+                        <small class="text-muted">
+                            Diagnosis
+                        </small>
+
+                        <p class="mt-2 mb-0">
+                            {{ visit.diagnosis or "Not provided" }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Follow-up -->
+
+                <div class="col-md-6">
+
+                    <div class="border rounded-3 p-3">
+
+                        <small class="text-muted">
+                            Follow-up Date
+                        </small>
+
+                        <h6 class="mt-1 mb-0">
+
+                            {% if visit.follow_up_date %}
+                            {{ visit.follow_up_date }}
+                            {% else %}
+                            Not scheduled
+                            {% endif %}
+
+                        </h6>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Consultation Details -->
+
+            <div class="mt-4">
+
+                <small class="text-muted">
+                    Consultation Summary
+                </small>
+
+                <div class="mt-2 p-3 bg-light rounded-3">
+
+                    <p class="mb-2">
+                        <strong>Symptoms:</strong>
+                        {{ visit.symptoms or "Not provided" }}
+                    </p>
+
+                    <p class="mb-2">
+                        <strong>Prescription:</strong>
+                        {{ visit.prescription or "Not provided" }}
+                    </p>
+
+                    <p class="mb-0">
+                        <strong>Doctor Notes:</strong>
+                        {{ visit.doctor_notes or "No notes provided" }}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Upload Report -->
+
+    <div class="card border-0 shadow-sm rounded-4">
+
+        <div class="card-body p-4">
+
+            <div class="mb-4">
+
+                <h4 class="mb-1">
+                    Upload Report
+                </h4>
+
+                <p class="text-muted mb-0">
+                    Add an X-ray, blood test, scan, prescription or other
+                    medical document for this patient.
+                </p>
+
+            </div>
+
+
+            <form method="POST" enctype="multipart/form-data">
+
+                <!-- Report Title -->
+
+                <div class="mb-3">
+
+                    <label class="form-label fw-semibold" for="reportTitle">
+                        Report Title
+                    </label>
+
+                    <input type="text" id="reportTitle" name="report_title" class="form-control"
+                        placeholder="e.g. Blood Test Report" required>
+
+                </div>
+
+
+                <!-- Description -->
+
+                <div class="mb-3">
+
+                    <label class="form-label fw-semibold" for="reportDescription">
+                        Description
+                    </label>
+
+                    <textarea id="reportDescription" name="report_description" class="form-control" rows="4"
+                        placeholder="Enter a short description of the report..."></textarea>
+
+                </div>
+
+
+                <!-- File -->
+
+                <div class="mb-4">
+
+                    <label class="form-label fw-semibold" for="reportFile">
+                        Select File
+                    </label>
+
+                    <input type="file" id="reportFile" name="report_file" class="form-control" required>
+
+                </div>
+
+
+                <!-- Button -->
+
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-upload me-1"></i>
+                    Upload Report
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

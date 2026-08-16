@@ -1,0 +1,368 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add New User
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h2 class="section-title mb-1">
+                Add New User
+            </h2>
+
+            <p class="text-muted mb-0">
+                Create a new patient, doctor, or staff account.
+            </p>
+
+        </div>
+
+        <a href="{{ url_for('admin.users') }}" class="btn btn-primary">
+            Back to User Management
+        </a>
+
+    </div>
+
+
+    <div class="card border-0 shadow-sm">
+
+        <div class="card-body">
+
+            <form method="POST">
+
+                <!-- Basic User Information -->
+
+                <h5 class="mb-3">
+                    Basic Information
+                </h5>
+
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label for="full_name" class="form-label">
+                            Full Name
+                        </label>
+
+                        <input type="text" id="full_name" name="full_name" class="form-control"
+                            placeholder="Enter full name" required>
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label for="email" class="form-label">
+                            Email
+                        </label>
+
+                        <input type="email" id="email" name="email" class="form-control"
+                            placeholder="Enter email address" required>
+
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label for="phone" class="form-label">
+                            Phone
+                        </label>
+
+                        <input type="text" id="phone" name="phone" class="form-control"
+                            placeholder="Enter phone number">
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label for="role" class="form-label">
+                            Role
+                        </label>
+
+                        <select id="role" name="role" class="form-select" required>
+
+                            <option value="">
+                                Select Role
+                            </option>
+
+                            <option value="patient">
+                                Patient
+                            </option>
+
+                            <option value="doctor">
+                                Doctor
+                            </option>
+
+                            <option value="receptionist">
+                                Receptionist
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-4">
+
+                        <label for="password" class="form-label">
+                            Password
+                        </label>
+
+                        <input type="password" id="password" name="password" class="form-control"
+                            placeholder="Enter password" minlength="6" required>
+
+                        <small class="text-muted">
+                            Password must contain at least 6 characters.
+                        </small>
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-4">
+
+                        <label for="status" class="form-label">
+                            Status
+                        </label>
+
+                        <select id="status" name="status" class="form-select" required>
+
+                            <option value="active">
+                                Active
+                            </option>
+
+                            <option value="inactive">
+                                Inactive
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Doctor Information -->
+
+                <div id="doctorFields" style="display: none;">
+
+                    <hr class="my-4">
+
+                    <h5 class="mb-3">
+                        Doctor Professional Details
+                    </h5>
+
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+
+                            <label for="department_id" class="form-label">
+                                Department / Speciality
+                            </label>
+
+                            <select id="department_id" name="department_id" class="form-select">
+
+                                <option value="">
+                                    Select Department
+                                </option>
+
+                                {% for department in departments %}
+
+                                <option value="{{ department.department_id }}">
+                                    {{ department.department_name }}
+                                </option>
+
+                                {% endfor %}
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+
+                            <label for="qualification" class="form-label">
+                                Qualification
+                            </label>
+
+                            <input type="text" id="qualification" name="qualification" class="form-control"
+                                placeholder="e.g. MBBS, MD">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+
+                            <label for="experience_years" class="form-label">
+                                Experience (Years)
+                            </label>
+
+                            <input type="number" id="experience_years" name="experience_years" class="form-control"
+                                placeholder="Enter years of experience" min="0">
+
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+
+                            <label for="consultation_fee" class="form-label">
+                                Consultation Fee (₹)
+                            </label>
+
+                            <input type="number" id="consultation_fee" name="consultation_fee" class="form-control"
+                                placeholder="Enter consultation fee" min="0" step="0.01">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="mb-4">
+
+                        <label for="about" class="form-label">
+                            About Doctor
+                        </label>
+
+                        <textarea id="about" name="about" class="form-control" rows="4"
+                            placeholder="Enter a short description about the doctor"></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Receptionist Information -->
+
+                <div id="receptionistFields" style="display: none;">
+
+                    <hr class="my-4">
+
+                    <h5 class="mb-3">
+                        Receptionist Details
+                    </h5>
+
+
+                    <div class="mb-4">
+
+                        <label for="employee_id" class="form-label">
+                            Employee ID
+                        </label>
+
+                        <input type="text" id="employee_id" name="employee_id" class="form-control"
+                            placeholder="Enter employee ID">
+
+                    </div>
+
+                </div>
+
+                <!-- Patient Information -->
+
+                <div id="patientFields" style="display: none;">
+
+                    <hr class="my-4">
+
+                    <h5 class="mb-3">
+                        Patient Information
+                    </h5>
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+
+                            <label for="date_of_birth" class="form-label">
+                                Date of Birth
+                            </label>
+
+                            <input type="date" id="date_of_birth" name="date_of_birth" class="form-control">
+
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+
+                            <label for="gender" class="form-label">
+                                Gender
+                            </label>
+
+                            <select id="gender" name="gender" class="form-select">
+
+                                <option value="">
+                                    Select Gender
+                                </option>
+
+                                <option value="Male">
+                                    Male
+                                </option>
+
+                                <option value="Female">
+                                    Female
+                                </option>
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <label for="address" class="form-label">
+                            Address
+                        </label>
+
+                        <textarea id="address" name="address" class="form-control" rows="3"
+                            placeholder="Enter patient address"></textarea>
+
+                    </div>
+
+
+                    <div class="mb-4">
+
+                        <label for="emergency_contact" class="form-label">
+                            Emergency Contact
+                        </label>
+
+                        <input type="text" id="emergency_contact" name="emergency_contact" class="form-control"
+                            placeholder="Enter emergency contact number">
+
+                    </div>
+
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    Create User
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

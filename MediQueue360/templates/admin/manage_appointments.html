@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+
+{% block title %}
+View Appointments
+{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+<div class="appointment-management-header">
+
+    <div>
+        <h2>
+            View Appointments
+        </h2>
+
+        <p>
+            View appointments scheduled for the clinic.
+        </p>
+    </div>
+
+    <a href="{{ url_for('admin.dashboard') }}" class="btn btn-primary">
+        <i class="bi bi-arrow-left me-1"></i>
+        Back to Dashboard
+    </a>
+
+</div>
+
+
+<!-- Appointments Table -->
+<div class="appointment-management-content">
+
+    <div class="appointment-table-card">
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover">
+
+                    <thead>
+
+                        <tr>
+                            <th>Patient</th>
+                            <th>Doctor</th>
+                            <th>Department</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% if appointments %}
+
+                        {% for appointment in appointments %}
+
+                        <tr>
+
+                            <td>
+                                {{ appointment.patient_name }}
+                            </td>
+
+                            <td>
+                                 {{ appointment.doctor_name }}
+                            </td>
+
+                            <td>
+
+                                {% if appointment.department_name %}
+
+                                {{ appointment.department_name }}
+
+                                {% else %}
+
+                                <span class="text-muted">
+                                    Not Assigned
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+                                {{ appointment.appointment_date }}
+                            </td>
+
+                            <td>
+
+                                {% if appointment.appointment_time %}
+
+                                {{ appointment.appointment_time }}
+
+                                {% else %}
+
+                                <span class="text-muted">
+                                    Not Assigned
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+
+                                {% if appointment.status == "Pending" %}
+
+                                <span class="badge bg-warning text-dark">
+                                    Pending
+                                </span>
+
+                                {% elif appointment.status == "Confirmed" %}
+
+                                <span class="badge bg-primary">
+                                    Confirmed
+                                </span>
+
+                                {% elif appointment.status == "Completed" %}
+
+                                <span class="badge bg-success">
+                                    Completed
+                                </span>
+
+                                {% elif appointment.status == "Cancelled" %}
+
+                                <span class="badge bg-secondary">
+                                    Cancelled
+                                </span>
+
+                                {% elif appointment.status == "Rejected" %}
+
+                                <span class="badge bg-danger">
+                                    Rejected
+                                </span>
+
+                                {% else %}
+
+                                <span class="badge bg-secondary">
+                                    {{ appointment.status }}
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                        {% else %}
+
+                        <tr>
+
+                            <td colspan="6" class="text-center">
+
+                                No appointments found.
+
+                            </td>
+
+                        </tr>
+
+                        {% endif %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

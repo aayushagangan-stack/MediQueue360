@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+{% block title %}
+Department Management
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="mb-4">
+
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+
+            <div>
+
+                <h2 class="section-title mb-1">
+                    Department Management
+                </h2>
+
+                <p class="text-muted mb-0">
+                    Add and manage departments available in the clinic.
+                </p>
+
+            </div>
+
+            <a href="{{ url_for('admin.dashboard') }}" class="btn btn-primary">
+                <i class="bi bi-arrow-left me-1"></i>
+                Back to Dashboard
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-lg-5">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-body">
+
+                    <h5 class="mb-4">
+                        Add Department
+                    </h5>
+
+
+                    <form method="POST">
+
+                        <div class="mb-3">
+
+                            <label for="department_name" class="form-label">
+                                Department Name
+                            </label>
+
+                            <input type="text" id="department_name" name="department_name" class="form-control"
+                                placeholder="Enter department name" required>
+
+                        </div>
+
+
+                        <div class="mb-4">
+
+                            <label for="description" class="form-label">
+                                Description
+                            </label>
+
+                            <textarea id="description" name="description" class="form-control" rows="4"
+                                placeholder="Enter department description"></textarea>
+
+                        </div>
+
+
+                        <button type="submit" class="btn btn-primary w-100">
+                            Add Department
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-7">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-body">
+
+                    <h5 class="mb-4">
+                        Available Departments
+                    </h5>
+
+
+                    <div class="table-responsive">
+
+                        <table class="table table-hover">
+
+                            <thead class="table-light">
+
+                                <tr>
+
+                                    <th>Department</th>
+
+                                    <th>Description</th>
+
+                                    <th>Action</th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                                {% if departments %}
+
+                                {% for department in departments %}
+
+                                <tr>
+
+                                    <td>
+                                        {{ department.department_name }}
+                                    </td>
+
+                                    <td>
+                                        {{ department.description or "No description provided." }}
+                                    </td>
+
+                                    <td>
+
+                                        <a href="{{ url_for('admin.edit_department', department_id=department.department_id) }}"
+                                            class="btn btn-sm btn-outline-primary">
+                                            Edit
+                                        </a>
+
+                                    </td>
+
+                                </tr>
+
+                                {% endfor %}
+
+                                {% else %}
+
+                                <tr>
+
+                                    <td colspan="3" class="text-center text-muted py-4">
+                                        No departments available.
+                                    </td>
+
+                                </tr>
+
+                                {% endif %}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,292 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit User
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h2 class="section-title mb-1">
+                Edit User
+            </h2>
+
+            <p class="text-muted mb-0">
+                Update the selected user's account information.
+            </p>
+
+        </div>
+
+        <a href="{{ url_for('admin.manage_user', user_id=user.user_id) }}" class="btn btn-primary">
+            Back to User
+        </a>
+
+    </div>
+
+
+    <div class="card border-0 shadow-sm">
+
+        <div class="card-body p-4">
+
+            <form method="POST">
+
+                <div class="row g-4">
+
+                    <!-- Full Name -->
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+                            Full Name
+                        </label>
+
+                        <input type="text" name="full_name" class="form-control" value="{{ user.full_name }}" required>
+
+                    </div>
+
+
+                    <!-- Email -->
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+                            Email Address
+                        </label>
+
+                        <input type="email" name="email" class="form-control" value="{{ user.email }}" required>
+
+                    </div>
+
+
+                    <!-- Phone -->
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+                            Phone Number
+                        </label>
+
+                        <input type="text" name="phone" class="form-control" value="{{ user.phone or '' }}">
+
+                    </div>
+
+
+                    <!-- Role -->
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+                            Account Role
+                        </label>
+
+                        <select name="role" class="form-select" required>
+
+                            <option value="patient" {% if user.role=="patient" %}selected{% endif %}>
+                                Patient
+                            </option>
+
+                            <option value="doctor" {% if user.role=="doctor" %}selected{% endif %}>
+                                Doctor
+                            </option>
+
+                            <option value="receptionist" {% if user.role=="receptionist" %}selected{% endif %}>
+                                Receptionist
+                            </option>
+
+                            <option value="admin" {% if user.role=="admin" %}selected{% endif %}>
+                                Admin
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Status -->
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+                            Account Status
+                        </label>
+
+                        <select name="status" class="form-select" required>
+
+                            <option value="active" {% if user.status=="active" %}selected{% endif %}>
+                                Active
+                            </option>
+
+                            <option value="inactive" {% if user.status=="inactive" %}selected{% endif %}>
+                                Inactive
+                            </option>
+
+                        </select>
+
+                    </div>
+                    {% if user.role == "doctor" %}
+
+                    <div class="col-md-6">
+                        <label class="form-label">Department</label>
+                        <select name="department_id" class="form-select">
+                            {% for department in departments %}
+                            <option value="{{ department.department_id }}" {% if
+                                department.department_id==user.department_id %}selected{% endif %}>
+                                {{ department.department_name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Qualification</label>
+                        <input type="text" name="qualification" class="form-control"
+                            value="{{ user.qualification or '' }}">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Experience (Years)</label>
+                        <input type="number" name="experience_years" class="form-control"
+                            value="{{ user.experience_years or 0 }}">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Consultation Fee</label>
+                        <input type="number" step="0.01" name="consultation_fee" class="form-control"
+                            value="{{ user.consultation_fee or 0 }}">
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label">About</label>
+                        <textarea name="about" class="form-control" rows="4">{{ user.about or '' }}</textarea>
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                {% if user.role == "receptionist" %}
+
+                <hr class="my-4">
+
+                <h5 class="mb-3">
+                    Receptionist Information
+                </h5>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+                            Employee ID
+                        </label>
+
+                        <input type="text" name="employee_id" class="form-control" value="{{ user.employee_id or '' }}">
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+
+
+
+                {% if user.role == "patient" %}
+
+                <hr class="my-4">
+
+                <h5 class="mb-3">
+                    Patient Information
+                </h5>
+
+                <div class="row g-4">
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+                            Date of Birth
+                        </label>
+
+                        <input type="date" name="date_of_birth" class="form-control"
+                            value="{{ user.date_of_birth or '' }}">
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+                            Gender
+                        </label>
+
+                        <select name="gender" class="form-select">
+
+                            <option value="">Select</option>
+
+                            <option value="Male" {% if user.gender=="Male" %}selected{% endif %}>
+                                Male
+                            </option>
+
+                            <option value="Female" {% if user.gender=="Female" %}selected{% endif %}>
+                                Female
+                            </option>
+
+                            <option value="Other" {% if user.gender=="Other" %}selected{% endif %}>
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+                            Emergency Contact
+                        </label>
+
+                        <input type="text" name="emergency_contact" class="form-control"
+                            value="{{ user.emergency_contact or '' }}">
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+                            Address
+                        </label>
+
+                        <input type="text" name="address" class="form-control" value="{{ user.address or '' }}">
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+
+                <div class="mt-5">
+
+                    <button type="submit" class="btn btn-primary">
+                        Save Changes
+                    </button>
+
+                    <a href="{{ url_for('admin.manage_user', user_id=user.user_id) }}"
+                        class="btn btn-outline-primary ms-2">
+                        Cancel
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

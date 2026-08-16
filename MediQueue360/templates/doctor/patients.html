@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block title %}
+My Patients
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- Page Header -->
+
+    <div class="card border-0 shadow-sm rounded-4 mb-4">
+
+        <div class="card-body p-4">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <div>
+                    <h2 class="section-title mb-1">
+                        My Patients
+                    </h2>
+
+                    <p class="text-muted mb-0">
+                        View patients who have consulted with you.
+                    </p>
+                </div>
+
+                <a href="{{ url_for('doctor.dashboard') }}" class="btn btn-primary px-4">
+                    <i class="bi bi-arrow-left me-1"></i>
+                    Back to Dashboard
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Patients Table -->
+
+    <div class="card border-0 shadow-sm rounded-4">
+
+        <div class="card-body p-4">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-light">
+
+                        <tr>
+
+                            <th>Patient ID</th>
+
+                            <th>Patient Name</th>
+
+                            <th>Email</th>
+
+                            <th>Phone</th>
+
+                            <th>Gender</th>
+
+                            <th>Date of Birth</th>
+
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% if patients %}
+
+                        {% for patient in patients %}
+
+                        <tr>
+
+                            <td>
+                                {{ patient.patient_id }}
+                            </td>
+
+                            <td class="fw-semibold">
+                                {{ patient.patient_name }}
+                            </td>
+
+                            <td>
+                                {{ patient.email }}
+                            </td>
+
+                            <td>
+                                {{ patient.phone or "Not provided" }}
+                            </td>
+
+                            <td>
+                                {{ patient.gender or "Not provided" }}
+                            </td>
+
+                            <td>
+                                {{ patient.date_of_birth or "Not provided" }}
+                            </td>
+
+                            <td>
+
+                                <a href="{{ url_for('doctor.patient_profile', patient_id=patient.patient_id) }}"
+                                    class="btn btn-sm btn-primary">
+                                    View Profile
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                        {% else %}
+
+                        <tr>
+
+                            <td colspan="7" class="text-center text-muted py-4">
+                                No patients found.
+                            </td>
+
+                        </tr>
+
+                        {% endif %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

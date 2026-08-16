@@ -1,0 +1,274 @@
+{% extends "base.html" %}
+
+{% block title %}
+My Appointments
+{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+
+<div class="my-appointments-header">
+
+    <div>
+
+        <h2 class="section-title mb-1">
+            My Appointments
+        </h2>
+
+        <p class="text-muted mb-0">
+            View and manage your clinic appointments.
+        </p>
+
+    </div>
+
+    <div class="appointment-header-actions">
+
+        <a href="{{ url_for('patient.dashboard') }}" class="btn btn-primary dashboard-back-btn">
+
+            <i class="bi bi-arrow-left me-1"></i>
+            Back to Dashboard
+
+        </a>
+
+        <a href="{{ url_for('patient.book_appointment') }}" class="btn btn-primary">
+
+            <i class="bi bi-calendar2-check me-1"></i>
+            Book Appointment
+
+        </a>
+
+    </div>
+
+</div>
+
+
+{% if appointments %}
+
+<!-- Appointments Table -->
+
+<div class="appointment-table-card">
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover mb-0">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Doctor</th>
+                        <th>Department</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Reason</th>
+                        <th>Status</th>
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for appointment in appointments %}
+
+                    <tr>
+
+                        <!-- Doctor -->
+
+                        <td>
+                            {{ appointment.doctor_name }}
+                        </td>
+
+
+                        <!-- Department -->
+
+                        <td>
+
+                            {% if appointment.department_name %}
+
+                            {{ appointment.department_name }}
+
+                            {% else %}
+
+                            <span class="text-muted">
+                                Not Assigned
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <!-- Date -->
+
+                        <td>
+                            {{ appointment.appointment_date }}
+                        </td>
+
+
+                        <!-- Time -->
+
+                        <td>
+
+                            {% if appointment.appointment_time %}
+
+                            {{ appointment.appointment_time }}
+
+                            {% else %}
+
+                            <span class="text-muted">
+                                Waiting for Confirmation
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <!-- Reason -->
+
+                        <td>
+
+                            {% if appointment.reason_for_visit %}
+
+                            {{ appointment.reason_for_visit }}
+
+                            {% else %}
+
+                            <span class="text-muted">
+                                Not Provided
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <!-- Status -->
+
+                        <td>
+
+                            {% if appointment.status == "Confirmed" %}
+
+                            <span class="badge bg-success status-badge">
+                                Confirmed
+                            </span>
+
+                            {% elif appointment.status == "Pending" %}
+
+                            <span class="badge bg-warning text-dark status-badge">
+                                Pending
+                            </span>
+
+                            {% elif appointment.status == "Completed" %}
+
+                            <span class="badge bg-primary status-badge">
+                                Completed
+                            </span>
+
+                            {% elif appointment.status == "Cancelled" %}
+
+                            <span class="badge bg-secondary status-badge">
+                                Cancelled
+                            </span>
+
+                            {% elif appointment.status == "Rejected" %}
+
+                            <span class="badge bg-danger status-badge">
+                                Rejected
+                            </span>
+
+                            {% else %}
+
+                            <span class="badge bg-secondary status-badge">
+                                {{ appointment.status }}
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <!-- Action -->
+
+                        <td>
+
+                            {% if appointment.status in ["Pending", "Confirmed"] %}
+
+                            <form action="{{ url_for(
+                                        'patient.cancel_appointment',
+                                        appointment_id=appointment.appointment_id
+                                    ) }}" method="POST" onsubmit="return confirm(
+                                        'Are you sure you want to cancel this appointment?'
+                                    );">
+
+                                <button type="submit" class="btn btn-sm btn-outline-danger">
+                                    Cancel
+                                </button>
+
+                            </form>
+
+                            {% else %}
+
+                            <span class="text-muted">
+                                No Action
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+{% else %}
+
+<!-- Empty Appointments -->
+
+<div class="appointment-empty-card">
+
+    <div class="card-body">
+
+        <i class="bi bi-calendar-x appointment-empty-icon"></i>
+
+        <h4 class="mb-3">
+            No Appointments Yet
+        </h4>
+
+        <p class="text-muted mb-4">
+            You have not booked any appointments yet.
+            Book an appointment to get started.
+        </p>
+
+        <div class="appointment-empty-actions">
+
+            <a href="{{ url_for('patient.book_appointment') }}" class="btn btn-primary">
+                <i class="bi bi-calendar2-check me-1"></i>
+                Book Your First Appointment
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+
+{% block title %}
+Queue Management
+{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+
+<div class="appointment-header">
+
+    <div>
+
+        <h2 class="section-title mb-1">
+            Queue Management
+        </h2>
+
+        <p class="text-muted mb-0">
+            Monitor and manage the current patient queue.
+        </p>
+
+    </div>
+
+
+    <div class="appointment-header-actions">
+
+        <a href="{{ url_for('receptionist.dashboard') }}" class="btn btn-primary">
+
+            <i class="bi bi-arrow-left me-1"></i>
+            Back to Dashboard
+
+        </a>
+
+    </div>
+
+</div>
+
+<!-- Queue Table -->
+
+<div class="appointment-table-card">
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Queue No.</th>
+                        <th>Patient</th>
+                        <th>Doctor</th>
+                        <th>Appointment Date</th>
+                        <th>Appointment Time</th>
+                        <th>Status</th>
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% if queue_entries %}
+
+                    {% for queue in queue_entries %}
+
+                    <tr>
+
+                        <td>
+                            {{ queue.queue_number }}
+                        </td>
+
+
+                        <td>
+                            {{ queue.patient_name }}
+                        </td>
+
+                        <td>
+                            {{ queue.doctor_name }}
+                        </td>
+
+                        <td>
+                            {{ queue.appointment_date }}
+                        </td>
+
+                        <td>
+                            {{ queue.appointment_time or "Not assigned" }}
+                        </td>
+
+                        <td>
+
+                            {% if queue.queue_status == "Waiting" %}
+
+                            <span class="badge bg-warning text-dark status-badge">
+                                Waiting
+                            </span>
+
+                            {% elif queue.queue_status == "In Consultation" %}
+
+                            <span class="badge bg-primary status-badge">
+                                In Consultation
+                            </span>
+
+                            {% elif queue.queue_status == "Completed" %}
+
+                            <span class="badge bg-success status-badge">
+                                Completed
+                            </span>
+
+                            {% else %}
+
+                            <span class="badge bg-secondary status-badge">
+                                {{ queue.queue_status }}
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <td>
+
+                            {% if queue.queue_status == "Waiting" %}
+
+                            <form action="{{ url_for(
+                                        'receptionist.update_queue_status',
+                                        queue_id=queue.queue_id,
+                                        status='In Consultation'
+                                    ) }}" method="POST">
+
+                                <button type="submit" class="btn btn-sm btn-primary">
+                                    Start Consultation
+                                </button>
+
+                            </form>
+
+
+                            {% elif queue.queue_status == "In Consultation" %}
+
+                            <form action="{{ url_for(
+                                        'receptionist.update_queue_status',
+                                        queue_id=queue.queue_id,
+                                        status='Completed'
+                                    ) }}" method="POST">
+
+                                <button type="submit" class="btn btn-sm btn-primary">
+                                    Complete
+                                </button>
+
+                            </form>
+
+
+                            {% else %}
+
+                            <span class="text-success fw-bold">
+                                Completed
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+
+                    {% else %}
+
+                    <tr>
+
+                        <td colspan="6" class="text-center text-muted py-5">
+                            No patients are currently in the queue.
+                        </td>
+
+                    </tr>
+
+                    {% endif %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

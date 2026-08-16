@@ -1,0 +1,308 @@
+{% extends "base.html" %}
+
+{% block title %}
+Medical Report Details
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- Page Header -->
+
+    <div class="appointment-header mb-4">
+
+        <div>
+
+            <h2 class="section-title mb-1">
+                Medical Report Details
+            </h2>
+
+            <p class="text-muted mb-0">
+                View the patient's consultation and medical report.
+            </p>
+
+        </div>
+
+        <div class="appointment-header-actions">
+
+            <a
+                href="{{ url_for('receptionist.reports') }}"
+                class="btn btn-primary"
+            >
+                <i class="bi bi-arrow-left me-1"></i>
+                Back to Reports
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- Consultation Details -->
+
+    <div class="appointment-table-card mb-4">
+
+        <div class="card-body p-4">
+
+            <h4 class="mb-4">
+                Consultation Details
+            </h4>
+
+            <div class="row g-3">
+
+                <!-- Patient -->
+
+                <div class="col-md-6">
+
+                    <div class="border rounded-3 p-3">
+
+                        <small class="text-muted">
+                            Patient
+                        </small>
+
+                        <h6 class="mt-1 mb-0">
+                            {{ report.patient_name }}
+                        </h6>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Doctor -->
+
+                <div class="col-md-6">
+
+                    <div class="border rounded-3 p-3">
+
+                        <small class="text-muted">
+                            Doctor
+                        </small>
+
+                        <h6 class="mt-1 mb-0">
+                            Dr. {{ report.doctor_name }}
+                        </h6>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Visit Date -->
+
+                <div class="col-md-6">
+
+                    <div class="border rounded-3 p-3">
+
+                        <small class="text-muted">
+                            Visit Date
+                        </small>
+
+                        <h6 class="mt-1 mb-0">
+                            {{ report.visit_date }}
+                        </h6>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Symptoms -->
+
+                <div class="col-md-6">
+
+                    <div class="border rounded-3 p-3">
+
+                        <small class="text-muted">
+                            Symptoms
+                        </small>
+
+                        <p class="mt-2 mb-0">
+                            {{ report.symptoms or "Not provided" }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Diagnosis -->
+
+                <div class="col-md-6">
+
+                    <div class="border rounded-3 p-3">
+
+                        <small class="text-muted">
+                            Diagnosis
+                        </small>
+
+                        <p class="mt-2 mb-0">
+                            {{ report.diagnosis or "Not provided" }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Prescription -->
+
+                <div class="col-md-6">
+
+                    <div class="border rounded-3 p-3">
+
+                        <small class="text-muted">
+                            Prescription
+                        </small>
+
+                        <p class="mt-2 mb-0">
+                            {{ report.prescription or "Not provided" }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Follow-up -->
+
+                <div class="col-md-6">
+
+                    <div class="border rounded-3 p-3">
+
+                        <small class="text-muted">
+                            Follow-up Date
+                        </small>
+
+                        <h6 class="mt-1 mb-0">
+
+                            {% if report.follow_up_date %}
+                                {{ report.follow_up_date }}
+                            {% else %}
+                                Not scheduled
+                            {% endif %}
+
+                        </h6>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Doctor Notes -->
+
+                <div class="col-12">
+
+                    <div class="border rounded-3 p-3">
+
+                        <small class="text-muted">
+                            Doctor Notes
+                        </small>
+
+                        <p class="mt-2 mb-0">
+                            {{ report.doctor_notes or "No notes provided" }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Medical Report -->
+
+    <div class="appointment-table-card">
+
+        <div class="card-body p-4">
+
+            <h4 class="mb-1">
+                Medical Report
+            </h4>
+
+            <p class="text-muted mb-4">
+                Report information and uploaded file.
+            </p>
+
+
+            <!-- Report Title -->
+
+            <div class="border rounded-3 p-3 mb-3">
+
+                <small class="text-muted">
+                    Report Title
+                </small>
+
+                <h6 class="mt-1 mb-0">
+                    {{ report.report_title }}
+                </h6>
+
+            </div>
+
+
+            <!-- Description -->
+
+            <div class="border rounded-3 p-3 mb-4">
+
+                <small class="text-muted">
+                    Description
+                </small>
+
+                <p class="mt-2 mb-0">
+                    {{ report.report_description or "No description provided" }}
+                </p>
+
+            </div>
+
+
+            <!-- Report Date -->
+
+            <p class="text-muted mb-3">
+
+                <strong>
+                    Report Date:
+                </strong>
+
+                {{ report.report_date }}
+
+            </p>
+
+
+            <!-- File -->
+
+            {% if report.file_path %}
+
+            <a
+                href="{{ url_for(
+                    'receptionist.view_report_file',
+                    filename=report.file_path
+                ) }}"
+                target="_blank"
+                class="btn btn-primary"
+            >
+
+                <i class="bi bi-file-earmark-medical me-1"></i>
+                View Report File
+
+            </a>
+
+            {% else %}
+
+            <span class="text-muted">
+                No report file available.
+            </span>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

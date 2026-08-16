@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit Department
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="mb-4">
+
+        <h2 class="section-title mb-1">
+            Edit Department
+        </h2>
+
+        <p class="text-muted mb-0">
+            Update department details or remove this department.
+        </p>
+
+    </div>
+
+
+    <div class="card border-0 shadow-sm">
+
+        <div class="card-body">
+
+            <form method="POST">
+
+                <div class="mb-3">
+
+                    <label for="department_name" class="form-label">
+                        Department Name
+                    </label>
+
+                    <input type="text" id="department_name" name="department_name" class="form-control"
+                        value="{{ department.department_name }}" required>
+
+                </div>
+
+
+                <div class="mb-4">
+
+                    <label for="description" class="form-label">
+                        Description
+                    </label>
+
+                    <textarea id="description" name="description" class="form-control"
+                        rows="4">{{ department.description or "" }}</textarea>
+
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">
+                    Save Changes
+                </button>
+
+
+                <a href="{{ url_for('admin.departments') }}" class="btn btn-secondary ms-2">
+                    Back
+                </a>
+
+            </form>
+
+
+            <hr class="my-4">
+
+
+            <form method="POST"
+                action="{{ url_for('admin.delete_department', department_id=department.department_id) }}"
+                onsubmit="return confirm('Are you sure you want to delete this department?');">
+
+                <button type="submit" class="btn btn-danger">
+                    Delete Department
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

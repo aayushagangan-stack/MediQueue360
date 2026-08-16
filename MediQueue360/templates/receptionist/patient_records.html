@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+
+{% block title %}
+Patient Records
+{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+
+<div class="appointment-header">
+
+    <div>
+
+        <h2 class="section-title mb-1">
+            Patient Records
+        </h2>
+
+        <p class="text-muted mb-0">
+            Search and view registered patient information.
+        </p>
+
+    </div>
+
+    <div class="appointment-header-actions">
+
+        <a href="{{ url_for('receptionist.dashboard') }}" class="btn btn-primary">
+            <i class="bi bi-arrow-left me-1"></i>
+            Back to Dashboard
+        </a>
+
+    </div>
+
+</div>
+
+<!-- Patient Search -->
+
+<div class="patient-search-card">
+
+    <div class="card-body p-4">
+
+        <form method="GET" action="{{ url_for('receptionist.patient_records') }}">
+
+            <div class="row g-3 align-items-end">
+
+                <!-- Search -->
+
+                <div class="col-lg-8 col-md-6">
+
+                    <label for="patientSearch" class="form-label fw-semibold">
+                        Search Patients
+                    </label>
+
+                    <input type="text" class="form-control" id="patientSearch" name="search" value="{{ search }}"
+                        placeholder="Search by patient ID, name or email">
+
+                </div>
+
+
+                <!-- Search Button -->
+
+                <div class="col-lg-2 col-md-3">
+
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-search me-1"></i>
+                        Search
+                    </button>
+
+                </div>
+
+
+                <!-- Clear Button -->
+
+                <div class="col-lg-2 col-md-3">
+
+                    <a href="{{ url_for('receptionist.patient_records') }}" class="btn btn-outline-secondary w-100">
+                        Clear
+                    </a>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- Patient Records Table -->
+
+<div class="appointment-table-card">
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Patient ID</th>
+                        <th>Patient</th>
+                        <th>Email</th>
+                        <th>Gender</th>
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% if patients %}
+
+                    {% for patient in patients %}
+
+                    <tr>
+
+                        <td>
+                            {% if patient.patient_id %}
+                            P-{{ "%03d"|format(patient.patient_id) }}
+                            {% else %}
+                            Not assigned
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {{ patient.patient_name }}
+                        </td>
+
+                        <td>
+                            {{ patient.patient_email }}
+                        </td>
+
+                        <td>
+                            {{ patient.gender or "Not provided" }}
+                        </td>
+
+                        <td>
+
+                            <a href="{{ url_for('receptionist.patient_profile', patient_id=patient.patient_id) }}"
+                                class="btn btn-sm btn-primary">
+                                <i class="bi bi-person me-1"></i>
+                                View Profile
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                    {% else %}
+
+                    <tr>
+
+                        <td colspan="5" class="text-center text-muted py-5">
+
+                            <i class="bi bi-person-x fs-3 d-block mb-2"></i>
+
+                            No patient records found.
+
+                        </td>
+
+                    </tr>
+
+                    {% endif %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

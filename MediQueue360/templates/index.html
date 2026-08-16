@@ -1,0 +1,1174 @@
+{% extends "base.html" %}
+
+{% block title %}
+MediQueue 360 | Digital Clinic Appointment System
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+
+<section class="hero-section">
+
+    <div class="container">
+
+        <div class="row align-items-center min-vh-75">
+
+            <div class="col-lg-6 col-md-12">
+
+                <span class="hero-badge">
+                    <i class="bi bi-shield-check me-2"></i>
+                    Trusted Digital Healthcare Platform
+                </span>
+
+                <h1 class="display-3 fw-bold hero-title">
+                    Healthcare,
+                    <span class="gradient-text">
+                        Simplified.
+                    </span>
+                </h1>
+
+                <p class="hero-description mt-4">
+                    MediQueue360 helps patients book appointments,
+                    manage their healthcare information, and access
+                    medical reports — all from one convenient digital platform.
+                </p>
+
+
+                <div class="hero-buttons mt-5">
+
+                    <a href="{{ url_for('auth.login') }}" class="btn btn-primary btn-lg me-2">
+                        Go to Dashboard
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+
+                <div class="hero-image-wrapper">
+
+                    <img src="{{ url_for('static', filename='images/hero-doctor.png') }}"
+                        class="img-fluid hero-image floating-image" alt="Professional Doctor">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--================= EXPERIENCE =================-->
+
+<section class="experience-section py-5">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-6 col-md-12">
+
+                <span class="section-tag">
+                    TRUSTED HEALTHCARE
+                </span>
+
+                <h2 class="section-title mt-3">
+
+                    Delivering Better Healthcare
+                    Every Single Day.
+
+                </h2>
+
+                <p class="section-subtitle mt-4">
+
+                    MediQueue360 provides a complete digital
+                    healthcare solution for clinics, doctors
+                    and patients with speed, security and
+                    convenience.
+
+                </p>
+
+                <div class="experience-decoration">
+
+                    <div class="deco-circle one"></div>
+
+                    <div class="deco-circle two"></div>
+
+                    <div class="deco-cross">
+                        +
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+
+                <div class="experience-grid">
+
+                    <div class="exp-box">
+
+                        <h2>5000+</h2>
+
+                        <span>Happy Patients</span>
+
+                    </div>
+
+                    <div class="exp-box">
+
+                        <h2>8+</h2>
+
+                        <span>Expert Doctors</span>
+
+                    </div>
+
+                    <div class="exp-box">
+
+                        <h2>6000+</h2>
+
+                        <span>Appointments Booked</span>
+
+                    </div>
+
+                    <div class="exp-box">
+
+                        <h2>8000+</h2>
+
+                        <span>Medical Reports</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--================ OUR SERVICES ================-->
+
+<section id="services" class="services-section py-5">
+
+    <div class="container position-relative">
+
+        <!-- Decorative Bubbles -->
+
+        <div class="service-bubble bubble-one"></div>
+        <div class="service-bubble bubble-two"></div>
+
+        <div class="text-center mx-auto mb-5" style="max-width:650px;">
+
+            <span class="section-tag">
+                OUR SERVICES
+            </span>
+
+            <h2 class="section-title mt-3">
+                Healthcare Made Easy
+            </h2>
+
+            <p class="section-subtitle services-subtitle">
+                Everything you need, all in one place.
+            </p>
+
+        </div>
+
+        <div class="row align-items-center g-5">
+
+            <!-- LEFT -->
+
+            <div class="col-lg-6 col-md-12">
+
+                <div id="serviceCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel"
+                    data-bs-interval="3500">
+
+                    <div class="carousel-indicators">
+
+                        <button type="button" data-bs-target="#serviceCarousel" data-bs-slide-to="0"
+                            class="active"></button>
+
+                        <button type="button" data-bs-target="#serviceCarousel" data-bs-slide-to="1"></button>
+
+                        <button type="button" data-bs-target="#serviceCarousel" data-bs-slide-to="2"></button>
+
+                        <button type="button" data-bs-target="#serviceCarousel" data-bs-slide-to="3"></button>
+
+                    </div>
+
+                    <div class="carousel-inner rounded-5">
+
+                        <div class="carousel-item active">
+
+                            <img src="{{ url_for('static', filename='images/service1.jpg') }}"
+                                class="d-block w-100 carousel-img">
+
+                            <div class="carousel-caption">
+
+                                <h3>Online Appointment</h3>
+
+                                <p>Book appointments in seconds.</p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="carousel-item">
+
+                            <img src="{{ url_for('static', filename='images/service2.jpg') }}"
+                                class="d-block w-100 carousel-img">
+
+                            <div class="carousel-caption">
+
+                                <h3>Expert Doctors</h3>
+
+                                <p>Consult experienced specialists.</p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="carousel-item">
+
+                            <img src="{{ url_for('static', filename='images/service3.jpg') }}"
+                                class="d-block w-100 carousel-img">
+
+                            <div class="carousel-caption">
+
+                                <h3>Medical Reports</h3>
+
+                                <p>Secure digital records.</p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="carousel-item">
+
+                            <img src="{{ url_for('static', filename='images/service4.jpg') }}"
+                                class="d-block w-100 carousel-img">
+
+                            <div class="carousel-caption">
+
+                                <h3>Appointment Management</h3>
+                                <p>Manage your appointments easily through one digital platform.</p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- RIGHT -->
+
+            <div class="col-lg-6 col-md-12">
+
+                <div class="service-list">
+
+                    <div class="service-item">
+
+                        <i class="bi bi-calendar2-check-fill"></i>
+
+                        <div>
+
+                            <h5>Online Appointment</h5>
+
+                            <p>Book your visit in just a few clicks.</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="service-item">
+
+                        <i class="bi bi-heart-pulse-fill"></i>
+
+                        <div>
+
+                            <h5>Expert Doctors</h5>
+
+                            <p>Consult trusted specialists anytime.</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="service-item">
+
+                        <i class="bi bi-file-earmark-medical-fill"></i>
+
+                        <div>
+
+                            <h5>Medical Reports</h5>
+
+                            <p>Download reports securely online.</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="service-item">
+
+                        <i class="bi bi-hourglass-split"></i>
+
+                        <div>
+
+                            <h5>Easy Appointment Management</h5>
+
+                            <p>
+                                View and manage your appointments conveniently in one place.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= WHY CHOOSE US og ================= -->
+
+<section class="why-us-section py-5">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-6 col-md-12">
+
+                <span class="section-tag">
+                    WHY CHOOSE US
+                </span>
+
+                <h2 class="section-title mt-3">
+
+                    A Better Way To
+                    Manage Healthcare
+
+                </h2>
+
+                <p class="section-subtitle mt-4">
+
+                    MediQueue360 combines technology with healthcare to
+                    provide a faster, safer and more convenient clinic
+                    experience for patients, doctors and administrators.
+
+                </p>
+
+                <div class="why-item">
+
+                    <div class="why-icon">
+
+                        <i class="bi bi-shield-check"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h5>Secure Medical Records</h5>
+
+                        <p>
+                            Your reports and medical history remain safe and accessible anytime.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="why-item">
+
+                    <div class="why-icon">
+
+                        <i class="bi bi-lightning-charge-fill"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h5>Instant Appointment Booking</h5>
+
+                        <p>
+                            Book and manage clinic appointments easily through the digital platform.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="why-item">
+
+                    <div class="why-icon">
+
+                        <i class="bi bi-people-fill"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h5>Experienced Healthcare Professionals</h5>
+
+                        <p>
+                            Explore healthcare professionals available across multiple departments
+                            through the MediQueue360 platform.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+
+                <div class="why-image">
+
+                    <img src="{{ url_for('static', filename='images/why-us.jpg') }}" class="img-fluid why-img"
+                        alt="Why Choose Us img">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= DEPARTMENTS ================= -->
+
+<section id="departments" class="departments-section py-5">
+
+    <div class="bubble1"></div>
+    <div class="bubble2"></div>
+    <div class="bubble3"></div>
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <span class="departments-tag">
+                OUR DEPARTMENTS
+            </span>
+
+            <h2 class="departments-title mt-3">
+                Specialized Healthcare Services
+            </h2>
+
+            <p class="departments-subtitle">
+                Explore the departments available through the MediQueue360
+                digital clinic appointment system.
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Cardiology -->
+            <div class="col-lg-3 col-md-6 col-12">
+
+                <div class="department-card">
+
+                    <img src="{{ url_for('static', filename='images/cardiology.jpg') }}" alt="Cardiology">
+
+                    <div class="department-overlay">
+
+                        <h4>Cardiology</h4>
+
+                        <p>Advanced heart care with experienced specialists.</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Dentistry -->
+            <div class="col-lg-3 col-md-6 col-12">
+
+                <div class="department-card">
+
+                    <img src="{{ url_for('static', filename='images/dentistry.png') }}" alt="Dentistry">
+
+                    <div class="department-overlay">
+
+                        <h4>Dentistry</h4>
+
+                        <p>Complete dental care for healthy teeth and confident smiles.</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Dermatology -->
+            <div class="col-lg-3 col-md-6 col-12">
+
+                <div class="department-card">
+
+                    <img src="{{ url_for('static', filename='images/dermatology.jpg') }}" alt="Dermatology">
+
+                    <div class="department-overlay">
+
+                        <h4>Dermatology</h4>
+
+                        <p>Modern skin, hair and cosmetic treatments with expert care.</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- General Medicine -->
+            <div class="col-lg-3 col-md-6 col-12">
+
+                <div class="department-card">
+
+                    <img src="{{ url_for('static', filename='images/general-medicine.jpg') }}" alt="General Medicine">
+
+                    <div class="department-overlay">
+
+                        <h4>General Medicine</h4>
+
+                        <p>Primary healthcare services for patients of all age groups.</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Gynecology -->
+            <div class="col-lg-3 col-md-6 col-12">
+
+                <div class="department-card">
+
+                    <img src="{{ url_for('static', filename='images/gynecology.jpg') }}" alt="Gynecology">
+
+                    <div class="department-overlay">
+
+                        <h4>Gynecology</h4>
+
+                        <p>Comprehensive women's healthcare with experienced specialists.</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Orthopedics -->
+            <div class="col-lg-3 col-md-6 col-12">
+
+                <div class="department-card">
+
+                    <img src="{{ url_for('static', filename='images/orthopedics.png') }}" alt="Orthopedics">
+
+                    <div class="department-overlay">
+
+                        <h4>Orthopedics</h4>
+
+                        <p>Expert treatment for bones, joints and sports injuries.</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Pediatrics -->
+            <div class="col-lg-3 col-md-6 col-12">
+
+                <div class="department-card">
+
+                    <img src="{{ url_for('static', filename='images/pediatrics.jpg') }}" alt="Pediatrics">
+
+                    <div class="department-overlay">
+
+                        <h4>Pediatrics</h4>
+
+                        <p>Compassionate healthcare services specially designed for children.</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Physiotherapy -->
+            <div class="col-lg-3 col-md-6 col-12">
+
+                <div class="department-card">
+
+                    <img src="{{ url_for('static', filename='images/physiotherapy.jpg') }}" alt="Physiotherapy">
+
+                    <div class="department-overlay">
+
+                        <h4>Physiotherapy</h4>
+
+                        <p>Rehabilitation and recovery programs for a healthier lifestyle.</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= OUR TOP DOCTORS ================= -->
+
+<section id="doctors" class="top-doctors-section">
+
+    <div class="container">
+
+        <div class="text-center top-doctors-heading">
+
+            <span class="top-doctors-tag">
+                OUR TOP DOCTORS
+            </span>
+
+            <h2 class="top-doctors-title mt-3">
+                Meet Our Healthcare Professionals
+            </h2>
+
+            <p class="top-doctors-subtitle">
+                Meet healthcare professionals available through the MediQueue360 platform.
+            </p>
+
+        </div>
+
+
+        <div class="row justify-content-center g-4">
+
+
+            <!-- Doctor 1 -->
+
+            <div class="col-lg-4 col-md-6 col-12">
+
+                <div class="doctor-card">
+
+                    <div class="doctor-image">
+
+                        <img src="{{ url_for('static', filename='images/doctor1.jpg') }}" alt="Dr. Shaunak Joshi">
+
+                    </div>
+
+                    <div class="doctor-info">
+
+                        <h4>
+                            Dr. Shaunak Joshi
+                        </h4>
+
+                        <p>
+                            Cardiologist
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Doctor 2 -->
+
+            <div class="col-lg-4 col-md-6 col-12">
+
+                <div class="doctor-card">
+
+                    <div class="doctor-image">
+
+                        <img src="{{ url_for('static', filename='images/doctor2.jpg') }}" alt="Dr. Vaishnavi Ghadge">
+
+                    </div>
+
+                    <div class="doctor-info">
+
+                        <h4>
+                            Dr. Vaishnavi Ghadge
+                        </h4>
+
+                        <p>
+                            Dermatologist
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Doctor 3 -->
+
+            <div class="col-lg-4 col-md-6 col-12">
+
+                <div class="doctor-card">
+
+                    <div class="doctor-image">
+
+                        <img src="{{ url_for('static', filename='images/doctor3.jpg') }}" alt="Dr. Hridan Deshmukh">
+
+                    </div>
+
+                    <div class="doctor-info">
+
+                        <h4>
+                            Dr. Hridan Deshmukh
+                        </h4>
+
+                        <p>
+                            Orthopedic Specialist
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= PATIENT TESTIMONIALS ================= -->
+
+<section id="testimonials" class="testimonials-section">
+
+    <div class="testimonial-bubble testimonial-bubble-one"></div>
+
+    <div class="testimonial-bubble testimonial-bubble-two"></div>
+
+    <div class="testimonial-bubble testimonial-bubble-three"></div>
+
+    <div class="testimonial-bubble testimonial-bubble-four"></div>
+
+    <div class="container">
+
+        <div class="text-center testimonials-heading">
+
+            <span class="testimonials-tag">
+                PATIENT EXPERIENCES
+            </span>
+
+            <h2 class="testimonials-title mt-3">
+                What Our Patients Say
+            </h2>
+
+            <p class="testimonials-subtitle">
+                Real experiences with the MediQueue360 healthcare platform.
+            </p>
+
+        </div>
+
+
+        <div id="testimonialCarousel" class="carousel slide testimonial-carousel" data-bs-ride="carousel">
+
+
+            <div class="carousel-inner">
+
+
+                <!-- TESTIMONIAL 1 -->
+
+                <div class="carousel-item active">
+
+                    <div class="testimonial-slide">
+
+                        <div class="testimonial-photo">
+
+                            <img src="{{ url_for('static', filename='images/patient1.jpg') }}" alt="Priya Kulkarni">
+
+                        </div>
+
+                        <h3>
+                            Priya Kulkarni
+                        </h3>
+
+                        <div class="testimonial-stars">
+
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+
+                        </div>
+
+                        <span class="testimonial-role">
+                            Patient
+                        </span>
+
+
+                        <p class="testimonial-text">
+
+                            “MediQueue360 made the appointment process
+                            much easier. I could register, manage my
+                            appointment and access my healthcare
+                            information from one convenient place.”
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TESTIMONIAL 2 -->
+
+                <div class="carousel-item">
+
+                    <div class="testimonial-slide">
+
+                        <div class="testimonial-photo">
+
+                            <img src="{{ url_for('static', filename='images/patient2.jpg') }}" alt="Rahul Desai">
+
+                        </div>
+
+
+                        <h3>
+                            Rahul Desai
+                        </h3>
+
+                        <div class="testimonial-stars">
+
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+
+                        </div>
+
+                        <span class="testimonial-role">
+                            Patient
+                        </span>
+
+
+                        <p class="testimonial-text">
+
+                            “The MediQueue360 system keeps everything
+                            organized. Checking my appointments and
+                            accessing my medical reports is simple and
+                            much more convenient than managing everything manually.”
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TESTIMONIAL 3 -->
+
+                <div class="carousel-item">
+
+                    <div class="testimonial-slide">
+
+                        <div class="testimonial-photo">
+
+                            <img src="{{ url_for('static', filename='images/patient3.jpg') }}" alt="Neha Patil">
+
+                        </div>
+
+
+                        <h3>
+                            Neha Patil
+                        </h3>
+
+                        <div class="testimonial-stars">
+
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+
+                        </div>
+
+                        <span class="testimonial-role">
+                            Patient
+                        </span>
+
+
+                        <p class="testimonial-text">
+
+                            “I really like how simple MediQueue360 is
+                            to use. Having my appointment information
+                            and digital medical reports available
+                            through the system makes the whole process
+                            feel more organized.”
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- PREVIOUS -->
+
+            <button class="carousel-control-prev testimonial-prev" type="button" data-bs-target="#testimonialCarousel"
+                data-bs-slide="prev">
+
+                <span class="testimonial-arrow">
+                    <i class="bi bi-chevron-left"></i>
+                </span>
+
+                <span class="visually-hidden">
+                    Previous
+                </span>
+
+            </button>
+
+
+            <!-- NEXT -->
+
+            <button class="carousel-control-next testimonial-next" type="button" data-bs-target="#testimonialCarousel"
+                data-bs-slide="next">
+
+                <span class="testimonial-arrow">
+                    <i class="bi bi-chevron-right"></i>
+                </span>
+
+                <span class="visually-hidden">
+                    Next
+                </span>
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= CALL TO ACTION ================= -->
+
+<section id="call_to_action" class="final-cta-section">
+
+    <div class="final-cta-bubble final-cta-bubble-one"></div>
+    <div class="final-cta-bubble final-cta-bubble-two"></div>
+    <div class="final-cta-bubble final-cta-bubble-three"></div>
+
+    <div class="container">
+
+        <div class="final-cta-box text-center">
+
+            <h2 class="final-cta-title mt-3">
+                Ready to Manage Your Healthcare Better?
+            </h2>
+
+            <p class="final-cta-text">
+                Get started with MediQueue360 and manage
+                your clinic appointments through one
+                convenient digital platform.
+            </p>
+
+            <a href="{{ url_for('auth.login') }}" class="final-cta-button">
+
+                Get Started
+                <i class="bi bi-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= FOOTER ================= -->
+
+<footer id="footer" class="mediqueue-footer">
+
+    <div class="container">
+
+        <div class="row gy-4">
+
+
+            <!-- BRAND -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="footer-brand">
+
+                    <h3>
+                        MediQueue<span>360</span>
+                    </h3>
+
+                    <p>
+                        A digital clinic appointment system that makes
+                        managing appointments and healthcare information
+                        simpler and more convenient.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUICK LINKS -->
+
+            <div class="col-lg-2 col-md-6">
+
+                <h5 class="footer-heading">
+                    Quick Links
+                </h5>
+
+                <ul class="footer-links">
+
+                    <li>
+                        <a href="/">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#services">
+                            Services
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#departments">
+                            Departments
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#doctors">
+                            Doctors
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- PATIENT -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <h5 class="footer-heading">
+                    Patient
+                </h5>
+
+                <ul class="footer-links">
+
+                    <li>
+                        <a href="{{ url_for('auth.login') }}">
+                            Login
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ url_for('auth.register') }}">
+                            Create Account
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#testimonials">
+                            Patient Experiences
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- CONTACT -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <h5 class="footer-heading">
+                    Contact
+                </h5>
+
+                <ul class="footer-contact">
+
+                    <li>
+                        <i class="bi bi-envelope"></i>
+                        <span>support@mediqueue360.com</span>
+                    </li>
+
+                    <li>
+                        <i class="bi bi-telephone"></i>
+                        <span>+91 98765 43210</span>
+                    </li>
+
+                    <li>
+                        <i class="bi bi-geo-alt"></i>
+                        <span>India</span>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <!-- BOTTOM -->
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 MediQueue360. All Rights Reserved.
+            </p>
+
+            <div class="footer-social">
+
+                <a href="#" aria-label="Facebook">
+                    <i class="bi bi-facebook"></i>
+                </a>
+
+                <a href="#" aria-label="Instagram">
+                    <i class="bi bi-instagram"></i>
+                </a>
+
+                <a href="#" aria-label="LinkedIn">
+                    <i class="bi bi-linkedin"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+{% endblock %}

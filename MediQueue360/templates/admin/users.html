@@ -1,0 +1,282 @@
+{% extends "base.html" %}
+
+{% block title %}
+User Management
+{% endblock %}
+
+{% block content %}
+
+<div class="user-management-header">
+
+    <div>
+        <h2 class="section-title mb-1">
+            User Management
+        </h2>
+
+        <p class="text-muted mb-0">
+            View and manage registered users.
+        </p>
+    </div>
+
+    <div class="user-management-actions">
+
+        <a href="{{ url_for('admin.dashboard') }}" class="btn btn-primary">
+            <i class="bi bi-arrow-left me-1"></i>
+            Back to Dashboard
+        </a>
+
+        <a href="{{ url_for('admin.add_user') }}" class="btn btn-success">
+            <i class="bi bi-person-plus-fill me-1"></i>
+            Add User
+        </a>
+
+    </div>
+
+</div>
+
+<div class="user-management-content">
+
+    <!-- User Search and Filters -->
+
+    <div class="card border-0 shadow-sm rounded-4 mb-4">
+
+        <div class="card-body p-4">
+
+            <form method="GET" action="{{ url_for('admin.users') }}">
+
+                <div class="row g-3 align-items-end">
+
+
+                    <!-- Search -->
+
+                    <div class="col-lg-5 col-md-6">
+
+                        <label for="userSearch" class="form-label fw-semibold">
+                            Search Users
+                        </label>
+
+                        <input type="text" class="form-control" id="userSearch" name="search" value="{{ search }}"
+                            placeholder="Search by name, email or phone">
+
+                    </div>
+
+
+                    <!-- Role -->
+
+                    <div class="col-lg-2 col-md-6">
+
+                        <label for="userRole" class="form-label fw-semibold">
+                            Role
+                        </label>
+
+                        <select class="form-select" id="userRole" name="role">
+
+                            <option value="">
+                                All Roles
+                            </option>
+
+                            <option value="admin" {% if selected_role=="admin" %}selected{% endif %}>
+                                Admin
+                            </option>
+
+                            <option value="doctor" {% if selected_role=="doctor" %}selected{% endif %}>
+                                Doctor
+                            </option>
+
+                            <option value="patient" {% if selected_role=="patient" %}selected{% endif %}>
+                                Patient
+                            </option>
+
+                            <option value="receptionist" {% if selected_role=="receptionist" %}selected{% endif %}>
+                                Receptionist
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Status -->
+
+                    <div class="col-lg-2 col-md-6">
+
+                        <label for="userStatus" class="form-label fw-semibold">
+                            Status
+                        </label>
+
+                        <select class="form-select" id="userStatus" name="status">
+
+                            <option value="">
+                                All Status
+                            </option>
+
+                            <option value="active" {% if selected_status=="active" %}selected{% endif %}>
+                                Active
+                            </option>
+
+                            <option value="inactive" {% if selected_status=="inactive" %}selected{% endif %}>
+                                Inactive
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Search Button -->
+
+                    <div class="col-lg-1 col-md-3">
+
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-search"></i>
+                        </button>
+
+                    </div>
+
+
+                    <!-- Clear Button -->
+
+                    <div class="col-lg-2 col-md-3">
+
+                        <a href="{{ url_for('admin.users') }}" class="btn btn-outline-secondary w-100">
+                            Clear
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- Users Table -->
+
+    <div class="card border-0 shadow-sm rounded-4">
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-light">
+
+                        <tr>
+
+                            <th>
+                                Name
+                            </th>
+
+                            <th>
+                                Email
+                            </th>
+
+                            <th>
+                                Phone
+                            </th>
+
+                            <th>
+                                Role
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% if users %}
+
+                        {% for user in users %}
+
+                        <tr>
+
+                            <td>
+                                {{ user.full_name }}
+                            </td>
+
+                            <td>
+                                {{ user.email }}
+                            </td>
+
+                            <td>
+                                {{ user.phone or "Not provided" }}
+                            </td>
+
+                            <td>
+                                {{ user.role|capitalize }}
+                            </td>
+
+                            <td>
+
+                                {% if user.status == "active" %}
+
+                                <span class="badge bg-success">
+                                    Active
+                                </span>
+
+                                {% else %}
+
+                                <span class="badge bg-secondary">
+                                    Inactive
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+
+                                <a href="{{ url_for('admin.manage_user', user_id=user.user_id) }}"
+                                    class="btn btn-sm btn-outline-primary admin-manage-btn">
+                                    Manage
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                        {% else %}
+
+                        <tr>
+
+                            <td colspan="6" class="text-center text-muted py-5">
+
+                                <i class="bi bi-search display-6 d-block mb-3"></i>
+
+                                No users found matching your search.
+
+                            </td>
+
+                        </tr>
+
+                        {% endif %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

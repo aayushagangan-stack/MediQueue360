@@ -1,0 +1,256 @@
+{% extends "base.html" %}
+
+{% block title %}
+Receptionist Dashboard | MediQueue 360
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <!-- Welcome Card -->
+
+    <div class="card border-0 shadow-lg mb-5 welcome-card">
+
+        <div class="card-body p-4">
+
+            <div class="row align-items-center">
+
+                <div class="col-lg-8">
+
+                    <h6 class="text-uppercase text-primary fw-bold mb-2">
+                        Receptionist Dashboard 👋
+                    </h6>
+
+                    <h2 class="fw-bold mb-2">
+                        {{ current_user.full_name }}
+                    </h2>
+
+                    <p class="text-muted mb-0">
+                        Welcome back to <strong>MediQueue 360</strong>.
+                        Manage appointments, patient records, medical reports
+                        and clinic operations from one place.
+                    </p>
+
+                </div>
+
+                <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+
+                    <a href="{{ url_for('home') }}" class="btn btn-primary px-4">
+
+                        <i class="bi bi-house-door-fill me-2"></i>
+                        Back to Home
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Dashboard Cards -->
+
+    <div class="row g-4">
+
+
+        <!-- Pending Appointments -->
+
+        <div class="col-md-6 col-lg-3">
+
+            <div class="card dashboard-card border-0 shadow-sm h-100">
+
+                <div class="card-body d-flex flex-column">
+
+                    <h5 class="fw-bold mb-3">
+
+                        <i class="bi bi-calendar2-check me-2 text-primary"></i>
+                        Pending Appointments
+
+                    </h5>
+
+                    <p class="text-muted flex-grow-1">
+                        Review new appointment requests, assign consultation
+                        times and confirm bookings.
+                    </p>
+
+                    <a href="{{ url_for('receptionist.appointments') }}" class="btn btn-primary w-100">
+
+                        View Requests
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Today's Schedule & Queue -->
+
+        <div class="col-md-6 col-lg-3">
+
+            <div class="card dashboard-card border-0 shadow-sm h-100">
+
+                <div class="card-body d-flex flex-column">
+
+                    <h5 class="fw-bold mb-3">
+
+                        <i class="bi bi-list-check me-2 text-primary"></i>
+                        Today's Schedule & Queue
+
+                    </h5>
+
+                    <p class="text-muted flex-grow-1">
+                        View today's confirmed appointments and manage the
+                        patient queue.
+                    </p>
+
+                    <a href="{{ url_for('receptionist.queue') }}" class="btn btn-primary w-100">
+
+                        Manage Queue
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Patient Reports -->
+
+        <div class="col-md-6 col-lg-3">
+
+            <div class="card dashboard-card border-0 shadow-sm h-100">
+
+                <div class="card-body d-flex flex-column">
+
+                    <h5 class="fw-bold mb-3">
+
+                        <i class="bi bi-file-earmark-medical me-2 text-primary"></i>
+                        Patient Reports
+
+                    </h5>
+
+                    <p class="text-muted flex-grow-1">
+                        View patient medical reports and consultation details.
+                    </p>
+
+                    <a href="{{ url_for('receptionist.reports') }}" class="btn btn-primary w-100">
+                        View Reports
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Patient Records -->
+
+        <div class="col-md-6 col-lg-3">
+
+            <div class="card dashboard-card border-0 shadow-sm h-100">
+
+                <div class="card-body d-flex flex-column">
+
+                    <h5 class="fw-bold mb-3">
+
+                        <i class="bi bi-people me-2 text-primary"></i>
+                        Patient Records
+
+                    </h5>
+
+                    <p class="text-muted flex-grow-1">
+                        Search patients, view profiles and check appointment
+                        history.
+                    </p>
+
+                    <a href="{{ url_for('receptionist.patient_records') }}" class="btn btn-primary mt-auto">
+                        View Records
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Quick Information -->
+
+    <div class="row mt-5">
+
+        <div class="col-lg-8">
+
+            <div class="card shadow-sm border-0">
+
+                <div class="card-body p-4">
+
+                    <h5 class="mb-3">
+                        Reception Desk at a Glance
+                    </h5>
+
+                    <p class="text-muted mb-0">
+                        Use MediQueue 360 to review appointment requests,
+                        assign consultation times, manage patient queues,
+                        and support smooth clinic operations.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-4 mt-4 mt-lg-0">
+
+            <div class="card shadow-sm border-0">
+
+                <div class="card-body p-4">
+
+                    <h5 class="mb-3">
+                        Account Information
+                    </h5>
+
+                    <p class="mb-2">
+
+                        <strong>
+                            Name:
+                        </strong>
+
+                        {{ current_user.full_name }}
+
+                    </p>
+
+                    <p class="mb-0">
+
+                        <strong>
+                            Email:
+                        </strong>
+
+                        {{ current_user.email }}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

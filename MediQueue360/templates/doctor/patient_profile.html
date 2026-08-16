@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+
+{% block title %}
+Patient Profile
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- Header -->
+
+    <div class="card border-0 shadow-sm rounded-4 mb-4">
+
+        <div class="card-body p-4">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <div>
+                    <h2 class="section-title mb-1">
+                        Patient Profile
+                    </h2>
+
+                    <p class="text-muted mb-0">
+                        View patient information and contact details.
+                    </p>
+                </div>
+
+                <a
+                    href="{{ url_for('doctor.patients') }}"
+                    class="btn btn-primary"
+                >
+                    <i class="bi bi-arrow-left me-1"></i>
+                    Back to Patients
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Patient Information -->
+
+    <div class="card border-0 shadow-sm rounded-4">
+
+        <div class="card-body p-4">
+
+            <h4 class="mb-4">
+                Patient Information
+            </h4>
+
+            <div class="row g-4">
+
+                <!-- Patient ID -->
+
+                <div class="col-md-6">
+
+                    <div class="border rounded-3 p-3">
+
+                        <small class="text-muted">
+                            Patient ID
+                        </small>
+
+                        <h6 class="mt-1 mb-0">
+                            {{ patient.patient_id }}
+                        </h6>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Full Name -->
+
+                <div class="col-md-6">
+
+                    <div class="border rounded-3 p-3">
+
+                        <small class="text-muted">
+                            Full Name
+                        </small>
+
+                        <h6 class="mt-1 mb-0">
+                            {{ patient.patient_name }}
+                        </h6>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Email -->
+
+                <div class="col-md-6">
+
+                    <div class="border rounded-3 p-3">
+
+                        <small class="text-muted">
+                            Email Address
+                        </small>
+
+                        <h6 class="mt-1 mb-0">
+                            {{ patient.email or "Not provided" }}
+                        </h6>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Phone -->
+
+                <div class="col-md-6">
+
+                    <div class="border rounded-3 p-3">
+
+                        <small class="text-muted">
+                            Phone Number
+                        </small>
+
+                        <h6 class="mt-1 mb-0">
+                            {{ patient.phone or "Not provided" }}
+                        </h6>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Date of Birth -->
+
+                <div class="col-md-6">
+
+                    <div class="border rounded-3 p-3">
+
+                        <small class="text-muted">
+                            Date of Birth
+                        </small>
+
+                        <h6 class="mt-1 mb-0">
+                            {{ patient.date_of_birth or "Not provided" }}
+                        </h6>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Gender -->
+
+                <div class="col-md-6">
+
+                    <div class="border rounded-3 p-3">
+
+                        <small class="text-muted">
+                            Gender
+                        </small>
+
+                        <h6 class="mt-1 mb-0">
+                            {{ patient.gender or "Not provided" }}
+                        </h6>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Emergency Contact -->
+
+                <div class="col-md-6">
+
+                    <div class="border rounded-3 p-3">
+
+                        <small class="text-muted">
+                            Emergency Contact
+                        </small>
+
+                        <h6 class="mt-1 mb-0">
+                            {{ patient.emergency_contact or "Not provided" }}
+                        </h6>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Address -->
+
+                <div class="col-12">
+
+                    <div class="border rounded-3 p-3">
+
+                        <small class="text-muted">
+                            Address
+                        </small>
+
+                        <p class="mt-2 mb-0">
+                            {{ patient.address or "Not provided" }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

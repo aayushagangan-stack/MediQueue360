@@ -1,0 +1,241 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Patient Profile
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- Page Header -->
+
+<div class="appointment-header">
+
+    <div>
+
+        <h2 class="section-title mb-1">
+            Patient Profile
+        </h2>
+
+        <p class="text-muted mb-0">
+            View patient information and account details.
+        </p>
+
+    </div>
+
+
+    <div class="appointment-header-actions">
+
+        <a href="{{ url_for('receptionist.patient_records') }}" class="btn btn-primary">
+            <i class="bi bi-arrow-left me-1"></i>
+            Back to Patient Records
+        </a>
+
+    </div>
+
+</div>
+
+
+
+<!-- Patient Profile Card -->
+
+<div class="appointment-table-card">
+
+    <div class="card-body">
+
+
+        <!-- Patient Heading -->
+
+        <div class="text-center mb-5">
+
+            <div class="profile-icon mb-3">
+                <i class="bi bi-person-circle"></i>
+            </div>
+
+            <h3 class="profile-title mb-1">
+                {{ patient.full_name }}
+            </h3>
+
+            <p class="text-muted mb-0">
+                Patient ID:
+                P-{{ "%03d"|format(patient.patient_id) }}
+            </p>
+
+        </div>
+
+
+
+        <!-- Patient Information -->
+
+        <div class="row g-4">
+
+
+            <!-- Patient ID -->
+
+            <div class="col-md-6">
+
+                <div class="profile-info-box">
+
+                    <small>
+                        Patient ID
+                    </small>
+
+                    <h6>
+                        P-{{ "%03d"|format(patient.patient_id) }}
+                    </h6>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Full Name -->
+
+            <div class="col-md-6">
+
+                <div class="profile-info-box">
+
+                    <small>
+                        Full Name
+                    </small>
+
+                    <h6>
+                        {{ patient.full_name }}
+                    </h6>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Email -->
+
+            <div class="col-md-6">
+
+                <div class="profile-info-box">
+
+                    <small>
+                        Email Address
+                    </small>
+
+                    <h6>
+                        {{ patient.email }}
+                    </h6>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Phone -->
+
+            <div class="col-md-6">
+
+                <div class="profile-info-box">
+
+                    <small>
+                        Phone Number
+                    </small>
+
+                    <h6>
+                        {{ patient.phone or "Not provided" }}
+                    </h6>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Date of Birth -->
+
+            <div class="col-md-6">
+
+                <div class="profile-info-box">
+
+                    <small>
+                        Date of Birth
+                    </small>
+
+                    <h6>
+                        {{ patient.date_of_birth or "Not Available" }}
+                    </h6>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Gender -->
+
+            <div class="col-md-6">
+
+                <div class="profile-info-box">
+
+                    <small>
+                        Gender
+                    </small>
+
+                    <h6>
+                        {{ patient.gender or "Not Available" }}
+                    </h6>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Emergency Contact -->
+
+            <div class="col-md-6">
+
+                <div class="profile-info-box">
+
+                    <small>
+                        Emergency Contact
+                    </small>
+
+                    <h6>
+                        {{ patient.emergency_contact or "Not Available" }}
+                    </h6>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Address -->
+
+            <div class="col-12">
+
+                <div class="profile-info-box">
+
+                    <small>
+                        Address
+                    </small>
+
+                    <h6>
+                        {{ patient.address or "Not Available" }}
+                    </h6>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+
+{% block title %}
+Book Appointment | MediQueue 360
+{% endblock %}
+
+{% block content %}
+
+<div class="appointment-page">
+
+    <!-- Page Header -->
+
+    <div class="appointment-header">
+
+        <div>
+
+            <h2 class="section-title mb-1">
+                Book an Appointment
+            </h2>
+
+            <p class="text-muted mb-0">
+                Choose your preferred doctor and appointment date.
+            </p>
+
+        </div>
+
+        <a href="{{ url_for('patient.dashboard') }}" class="btn btn-primary dashboard-back-btn">
+            <i class="bi bi-arrow-left me-1"></i>
+            Back to Dashboard
+        </a>
+
+    </div>
+
+
+    <!-- Appointment Card -->
+
+    <div class="appointment-content">
+
+        <div class="appointment-card">
+
+            <div class="appointment-card-body">
+
+
+                <!-- Information -->
+
+                <div class="appointment-intro">
+
+                    <h4>
+                        Appointment Details
+                    </h4>
+
+                    <p>
+                        Select a doctor, choose your preferred date,
+                        and provide a brief reason for your visit.
+                        The clinic will assign your appointment time
+                        after reviewing your request.
+                    </p>
+
+                </div>
+
+
+                <!-- Flash Messages -->
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+
+                {% if messages %}
+
+                {% for category, message in messages %}
+
+                <div class="alert alert-{{ category }} alert-dismissible fade show">
+
+                    {{ message }}
+
+                    <button type="button" class="btn-close" data-bs-dismiss="alert">
+                    </button>
+
+                </div>
+
+                {% endfor %}
+
+                {% endif %}
+
+                {% endwith %}
+
+
+                <!-- Appointment Form -->
+
+                <form method="POST">
+
+                    <!-- Department -->
+
+                    <div class="mb-4">
+
+                        <label for="department_id" class="form-label">
+                            Select Department
+                        </label>
+
+                        <select class="form-select" id="department_id" name="department_id" required>
+
+                            <option value="">
+                                Select a department
+                            </option>
+
+                            {% for department in departments %}
+
+                            <option value="{{ department.department_id }}">
+                                {{ department.department_name }}
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+                    <!-- Doctor -->
+
+                    <div class="mb-4">
+
+                        <label for="doctor_id" class="form-label">
+
+                            Select Doctor
+
+                        </label>
+
+                        <select class="form-select" id="doctor_id" name="doctor_id" required>
+
+                            <option value="">
+                                Select a doctor
+                            </option>
+
+                            {% for doctor in doctors %}
+
+                            <option value="{{ doctor.doctor_id }}" data-department="{{ doctor.department_id }}">
+                                {{ doctor.full_name }}
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Appointment Date -->
+
+                    <div class="mb-4">
+
+                        <label for="appointment_date" class="form-label">
+
+                            Appointment Date
+
+                        </label>
+
+                        <input type="date" class="form-control" id="appointment_date" name="appointment_date"
+                            min="{{ today }}" required>
+
+                    </div>
+
+
+                    <!-- Reason -->
+
+                    <div class="mb-4">
+
+                        <label for="reason_for_visit" class="form-label">
+
+                            Reason for Visit
+
+                        </label>
+
+                        <textarea class="form-control" id="reason_for_visit" name="reason_for_visit" rows="4"
+                            placeholder="Briefly describe the reason for your visit"></textarea>
+
+                    </div>
+
+
+                    <!-- Buttons -->
+
+                    <div class="appointment-actions">
+
+                        <a href="{{ url_for('patient.dashboard') }}" class="btn btn-outline-secondary">
+
+                            Cancel
+
+                        </a>
+
+
+                        <button type="submit" class="btn btn-primary">
+
+                            <i class="bi bi-calendar2-check me-1"></i>
+                            Book Appointment
+
+                        </button>
+
+                    </div>
+
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block title %}
+Manage Reports
+{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+
+<div class="appointment-header">
+
+    <div>
+
+        <h2 class="section-title mb-1">
+            Manage Reports
+        </h2>
+
+        <p class="text-muted mb-0">
+            View patient consultation details and upload medical reports.
+        </p>
+
+    </div>
+
+    <div class="appointment-header-actions">
+
+        <a href="{{ url_for('doctor.dashboard') }}" class="btn btn-primary dashboard-back-btn">
+            <i class="bi bi-arrow-left me-1"></i>
+            Back to Dashboard
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- Records Table -->
+
+<div class="appointment-management-content">
+
+    <div class="appointment-table-card">
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover">
+
+                    <thead>
+                        <tr>
+                            <th>Patient ID</th>
+                            <th>Patient</th>
+                            <th>Diagnosis</th>
+                            <th>Appointment Date</th>
+                            <th>Appointment Time</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% if records %}
+
+                        {% for record in records %}
+
+                        <tr>
+
+                            <!-- Patient ID -->
+                            <td>
+                                {{ record.patient_id }}
+                            </td>
+
+                            <!-- Patient -->
+                            <td>
+                                {{ record.patient_name }}
+                            </td>
+
+                            <!-- Diagnosis -->
+                            <td>
+                                {{ record.diagnosis or "Not Provided" }}
+                            </td>
+
+                            <!-- Appointment Date -->
+                            <td>
+                                {% if record.appointment_date %}
+                                {{ record.appointment_date.strftime("%d-%m-%Y") }}
+                                {% else %}
+                                Not Available
+                                {% endif %}
+                            </td>
+
+                            <!-- Appointment Time -->
+                            <td>
+                                {% if record.appointment_time %}
+                                {{ record.appointment_time }}
+                                {% else %}
+                                Not Available
+                                {% endif %}
+                            </td>
+
+                            <!-- Action -->
+                            <td>
+                                <a href="{{ url_for(
+                        'doctor.upload_report',
+                        visit_id=record.visit_id
+                    ) }}" class="btn btn-sm btn-primary">
+                                    <i class="bi bi-upload me-1"></i>
+                                    Upload Report
+                                </a>
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                        {% else %}
+
+                        <tr>
+                            <td colspan="6" class="text-center text-muted py-5">
+                                No consultation records found.
+                            </td>
+                        </tr>
+
+                        {% endif %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

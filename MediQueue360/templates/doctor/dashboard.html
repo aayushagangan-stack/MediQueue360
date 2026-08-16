@@ -1,0 +1,266 @@
+{% extends "base.html" %}
+
+{% block title %}
+Doctor Dashboard | MediQueue 360
+{% endblock %}
+
+
+{% block content %}
+
+<section class="py-5">
+
+    <div class="container">
+
+        <!-- Welcome Card -->
+
+        <div class="card border-0 shadow-lg mb-5 welcome-card">
+
+            <div class="card-body p-4">
+
+                <div class="row align-items-center">
+
+                    <div class="col-lg-8">
+
+                        <h6 class="text-uppercase text-primary fw-bold mb-2">
+                            Doctor Dashboard 👋
+                        </h6>
+
+                        <h2 class="fw-bold mb-2">
+                            {{ current_user.full_name }}
+                        </h2>
+
+                        <p class="text-muted mb-0">
+                            Welcome back to <strong>MediQueue 360</strong>.
+                            Manage your appointments, patients, medical
+                            records and reports from one place.
+                        </p>
+
+                    </div>
+
+
+                    <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+
+                        <a href="{{ url_for('home') }}" class="btn btn-primary px-4">
+
+                            <i class="bi bi-house-door-fill me-2"></i>
+                            Back to Home
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Dashboard Cards -->
+
+        <div class="row g-4">
+
+
+            <!-- View Appointments -->
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="card dashboard-card border-0 shadow-sm h-100">
+
+                    <div class="card-body d-flex flex-column">
+
+                        <h5 class="fw-bold mb-3">
+
+                            <i class="bi bi-calendar2-check me-2 text-primary"></i>
+                            View Appointments
+
+                        </h5>
+
+
+                        <p class="text-muted flex-grow-1">
+                            View confirmed appointments and begin
+                            patient consultations.
+                        </p>
+
+
+                        <a href="{{ url_for('doctor.appointments') }}" class="btn btn-primary w-100">
+
+                            View Appointments
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- My Patients -->
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="card dashboard-card border-0 shadow-sm h-100">
+
+                    <div class="card-body d-flex flex-column">
+
+                        <h5 class="fw-bold mb-3">
+
+                            <i class="bi bi-people me-2 text-primary"></i>
+                            My Patients
+
+                        </h5>
+
+
+                        <p class="text-muted flex-grow-1">
+                            View patients who have consulted with you and
+                            access their information.
+                        </p>
+
+
+                        <a href="{{ url_for('doctor.patients') }}" class="btn btn-primary w-100">
+
+                            View Patients
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Manage Reports -->
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="card dashboard-card border-0 shadow-sm h-100">
+
+                    <div class="card-body d-flex flex-column">
+
+                        <h5 class="fw-bold mb-3">
+                            <i class="bi bi-journal-medical me-2 text-primary"></i>
+                            Manage Reports
+                        </h5>
+
+                        <p class="text-muted flex-grow-1">
+                            Upload and manage medical reports for your patients.
+                        </p>
+
+                        <a href="{{ url_for('doctor.records') }}" class="btn btn-primary w-100">
+                            Manage Reports
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Medical Reports -->
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="card dashboard-card border-0 shadow-sm h-100">
+
+                    <div class="card-body d-flex flex-column">
+
+                        <h5 class="fw-bold mb-3">
+                            <i class="bi bi-file-earmark-medical me-2 text-primary"></i>
+                            Medical Reports
+                        </h5>
+
+                        <p class="text-muted flex-grow-1">
+                            View uploaded medical reports of your patients.
+                        </p>
+
+                        <a href="{{ url_for('doctor.reports') }}" class="btn btn-primary w-100">
+                            View Reports
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Quick Information -->
+
+            <div class="row mt-5">
+
+
+                <div class="col-lg-8">
+
+                    <div class="card shadow-sm border-0">
+
+                        <div class="card-body p-4">
+
+                            <h5 class="mb-3">
+                                Doctor Workspace at a Glance
+                            </h5>
+
+
+                            <p class="text-muted mb-0">
+                                Use MediQueue 360 to manage your appointments,
+                                consult patients, maintain medical records and
+                                manage patient medical reports efficiently.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="col-lg-4 mt-4 mt-lg-0">
+
+                    <div class="card shadow-sm border-0">
+
+                        <div class="card-body p-4">
+
+                            <h5 class="mb-3">
+                                Account Information
+                            </h5>
+
+
+                            <p class="mb-2">
+
+                                <strong>
+                                    Name:
+                                </strong>
+
+                                {{ current_user.full_name }}
+
+                            </p>
+
+
+                            <p class="mb-0">
+
+                                <strong>
+                                    Email:
+                                </strong>
+
+                                {{ current_user.email }}
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+</section>
+
+{% endblock %}

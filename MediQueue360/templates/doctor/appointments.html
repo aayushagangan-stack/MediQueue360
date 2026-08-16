@@ -1,0 +1,218 @@
+{% extends "base.html" %}
+
+{% block title %}
+Doctor Appointments | MediQueue 360
+{% endblock %}
+
+
+{% block content %}
+
+<!-- Page Header -->
+
+<div class="appointment-header">
+
+    <div>
+
+        <h2 class="section-title mb-1">
+            My Appointments
+        </h2>
+
+        <p class="text-muted mb-0">
+            View and manage appointments assigned to you.
+        </p>
+
+    </div>
+
+
+    <div class="appointment-header-actions">
+
+        <a
+            href="{{ url_for('doctor.dashboard') }}"
+            class="btn btn-primary"
+        >
+
+            <i class="bi bi-arrow-left me-1"></i>
+            Back to Dashboard
+
+        </a>
+
+    </div>
+
+</div>
+
+
+
+<!-- Appointments Table -->
+
+<div class="appointment-table-card">
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Patient</th>
+
+                        <th>Date</th>
+
+                        <th>Time</th>
+
+                        <th>Reason</th>
+
+                        <th>Status</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% if appointments %}
+
+                        {% for appointment in appointments %}
+
+                        <tr>
+
+                            <!-- Patient -->
+
+                            <td>
+
+                                <div class="fw-semibold">
+
+                                    {{ appointment.patient_name }}
+
+                                </div>
+
+                            </td>
+
+
+                            <!-- Date -->
+
+                            <td>
+
+                                {{ appointment.appointment_date }}
+
+                            </td>
+
+
+                            <!-- Time -->
+
+                            <td>
+
+                                {{ appointment.appointment_time }}
+
+                            </td>
+
+
+                            <!-- Reason -->
+
+                            <td>
+
+                                {{ appointment.reason_for_visit or "Not Provided" }}
+
+                            </td>
+
+
+                            <!-- Status -->
+
+                            <td>
+
+                                {% if appointment.status == "Confirmed" %}
+
+                                    <span class="badge bg-success status-badge">
+
+                                        Confirmed
+
+                                    </span>
+
+                                {% elif appointment.status == "Completed" %}
+
+                                    <span class="badge bg-primary status-badge">
+
+                                        Completed
+
+                                    </span>
+
+                                {% elif appointment.status == "Cancelled" %}
+
+                                    <span class="badge bg-danger status-badge">
+
+                                        Cancelled
+
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="badge bg-secondary status-badge">
+
+                                        {{ appointment.status }}
+
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <!-- Action -->
+
+                            <td>
+
+                                <a
+                                    href="{{ url_for(
+                                        'doctor.consult_patient',
+                                        appointment_id=appointment.appointment_id
+                                    ) }}"
+                                    class="btn btn-sm btn-primary"
+                                >
+
+                                    <i class="bi bi-clipboard2-pulse me-1"></i>
+                                    Consult
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+
+                    {% else %}
+
+                        <tr>
+
+                            <td
+                                colspan="6"
+                                class="text-center text-muted py-5"
+                            >
+
+                                <i class="bi bi-calendar-x fs-2 d-block mb-2"></i>
+
+                                No appointments available.
+
+                            </td>
+
+                        </tr>
+
+                    {% endif %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

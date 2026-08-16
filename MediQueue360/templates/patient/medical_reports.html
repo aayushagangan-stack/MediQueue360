@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block title %}
+Medical Reports
+{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+
+<div class="medical-reports-header">
+
+    <div>
+
+        <h2 class="section-title mb-1">
+            Medical Reports
+        </h2>
+
+        <p class="text-muted mb-0">
+            View your medical reports and consultation records.
+        </p>
+
+    </div>
+
+    <a href="{{ url_for('patient.dashboard') }}" class="btn btn-primary dashboard-back-btn">
+
+        <i class="bi bi-arrow-left me-1"></i>
+        Back to Dashboard
+
+    </a>
+
+</div>
+
+
+<!-- Reports -->
+
+{% if reports %}
+
+<div class="medical-reports-card">
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover mb-0">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Doctor</th>
+                        <th>Report</th>
+                        <th>Report Date and Time</th>
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for report in reports %}
+
+                    <tr>
+
+                        <!-- Doctor -->
+
+                        <td>
+                            {{ report.doctor_name }}
+                        </td>
+
+
+                        <!-- Report -->
+
+                        <td>
+
+                            {{ report.report_title }}
+
+                        </td>
+
+
+                        <!-- Date -->
+
+                        <td>
+
+                            {{ report.report_date }}
+
+                        </td>
+
+
+                        <!-- Action -->
+
+                        <td>
+
+                            {% if report.file_path %}
+
+                            <a href="{{ url_for('patient.view_report', report_id=report.report_id) }}"
+                                class="btn btn-primary medical-report-view-btn">
+
+                                <i class="bi bi-file-earmark-medical me-1"></i>
+                                View Report
+
+                            </a>
+
+                            {% else %}
+
+                            <span class="text-muted">
+                                No File
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+{% else %}
+
+<!-- No Reports -->
+
+<div class="medical-reports-empty">
+
+    <div class="card-body">
+
+        <i class="bi bi-file-earmark-medical appointment-empty-icon"></i>
+
+        <h4 class="mb-3">
+            No Medical Reports Yet
+        </h4>
+
+        <p class="text-muted mb-4">
+            Your medical reports will appear here after your clinic visit.
+        </p>
+
+    </div>
+
+</div>
+
+{% endif %}
+
+{% endblock %}

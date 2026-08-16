@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block title %}
+Assign Appointment Time
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card shadow-sm border-0">
+
+                <div class="card-body p-4">
+
+                    <h2 class="mb-4">
+                        Assign Appointment Time
+                    </h2>
+
+                    <div class="mb-3">
+
+                        <strong>Patient</strong><br>
+
+                        {{ appointment.patient_name }}
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <strong>Doctor</strong><br>
+
+                        {{ appointment.doctor_name }}
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <strong>Department</strong><br>
+
+                        {{ appointment.department_name or "Not Assigned" }}
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <strong>Appointment Date</strong><br>
+
+                        {{ appointment.appointment_date }}
+
+                    </div>
+
+                    <div class="mb-4">
+
+                        <strong>Reason for Visit</strong><br>
+
+                        {{ appointment.reason_for_visit or "Not Provided" }}
+
+                    </div>
+
+                    <hr>
+
+                    <form method="POST">
+
+                        <div class="mb-4">
+
+                            <label
+                                class="form-label"
+                                for="appointment_time">
+
+                                Appointment Time
+
+                            </label>
+
+                            <input
+                                type="time"
+                                class="form-control"
+                                id="appointment_time"
+                                name="appointment_time"
+                                required>
+
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+
+                            <a
+                                href="{{ url_for('receptionist.appointments') }}"
+                                class="btn btn-outline-secondary">
+
+                                Back
+
+                            </a>
+
+                            <button
+                                type="submit"
+                                class="btn btn-success">
+
+                                Confirm Appointment
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

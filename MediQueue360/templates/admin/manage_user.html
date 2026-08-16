@@ -1,0 +1,342 @@
+{% extends "base.html" %}
+
+{% block title %}
+Manage User
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h2 class="section-title mb-1">
+                 User Management
+            </h2>
+
+            <p class="text-muted mb-0">
+                View and manage patient, doctor, and receptionist accounts.
+            </p>
+
+        </div>
+
+        <a href="{{ url_for('admin.users') }}" class="btn btn-primary">
+            Back to Users
+        </a>
+
+    </div>
+
+
+    <div class="card border-0 shadow-sm">
+
+        <div class="card-body p-4">
+
+            <div class="row g-4">
+
+                <!-- Full Name -->
+
+                <div class="col-md-6">
+
+                    <div class="border rounded p-3">
+
+                        <small class="text-muted">
+                            Full Name
+                        </small>
+
+                        <h6 class="mt-1 mb-0">
+                            {{ user.full_name }}
+                        </h6>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Email -->
+
+                <div class="col-md-6">
+
+                    <div class="border rounded p-3">
+
+                        <small class="text-muted">
+                            Email Address
+                        </small>
+
+                        <h6 class="mt-1 mb-0">
+                            {{ user.email }}
+                        </h6>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Phone -->
+
+                <div class="col-md-6">
+
+                    <div class="border rounded p-3">
+
+                        <small class="text-muted">
+                            Phone Number
+                        </small>
+
+                        <h6 class="mt-1 mb-0">
+                            {{ user.phone or "Not provided" }}
+                        </h6>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Role -->
+
+                <div class="col-md-6">
+
+                    <div class="border rounded p-3">
+
+                        <small class="text-muted">
+                            Account Type
+                        </small>
+
+                        <h6 class="mt-1 mb-0">
+                            {{ user.role|capitalize }}
+                        </h6>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Status -->
+
+                <div class="col-md-6">
+
+                    <div class="border rounded p-3">
+
+                        <small class="text-muted">
+                            Account Status
+                        </small>
+
+                        <h6 class="mt-1 mb-0">
+
+                            {% if user.status == "active" %}
+
+                            <span class="badge bg-success">
+                                Active
+                            </span>
+
+                            {% else %}
+
+                            <span class="badge bg-secondary">
+                                Inactive
+                            </span>
+
+                            {% endif %}
+
+                        </h6>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Created Date -->
+
+                <div class="col-md-6">
+
+                    <div class="border rounded p-3">
+
+                        <small class="text-muted">
+                            Member Since
+                        </small>
+
+                        <h6 class="mt-1 mb-0">
+                            {{ user.created_at or "Not available" }}
+                        </h6>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- Doctor Information -->
+
+            {% if user.role == "doctor" %}
+
+            <hr class="my-5">
+
+            <h4 class="mb-4">
+                Professional Information
+            </h4>
+
+            <div class="row g-4">
+
+                <div class="col-md-6">
+                    <div class="border rounded p-3">
+                        <small class="text-muted">Department</small>
+                        <h6 class="mt-1 mb-0">
+                            {{ user.department_name or "Not Assigned" }}
+                        </h6>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="border rounded p-3">
+                        <small class="text-muted">Qualification</small>
+                        <h6 class="mt-1 mb-0">
+                            {{ user.qualification or "Not Available" }}
+                        </h6>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="border rounded p-3">
+                        <small class="text-muted">Experience</small>
+                        <h6 class="mt-1 mb-0">
+                            {{ user.experience_years }} Years
+                        </h6>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="border rounded p-3">
+                        <small class="text-muted">Consultation Fee</small>
+                        <h6 class="mt-1 mb-0">
+                            ₹{{ user.consultation_fee }}
+                        </h6>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="border rounded p-3">
+                        <small class="text-muted">About</small>
+                        <p class="mb-0 mt-2">
+                            {{ user.about or "No information available." }}
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            {% endif %}
+
+
+
+            <!-- Patient Information -->
+
+            {% if user.role == "patient" %}
+
+            <hr class="my-5">
+
+            <h4 class="mb-4">
+                Patient Information
+            </h4>
+
+            <div class="row g-4">
+
+                <div class="col-md-6">
+                    <div class="border rounded p-3">
+                        <small class="text-muted">Date of Birth</small>
+                        <h6 class="mt-1 mb-0">
+                            {{ user.date_of_birth or "Not Available" }}
+                        </h6>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="border rounded p-3">
+                        <small class="text-muted">Gender</small>
+                        <h6 class="mt-1 mb-0">
+                            {{ user.gender or "Not Available" }}
+                        </h6>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="border rounded p-3">
+                        <small class="text-muted">Emergency Contact</small>
+                        <h6 class="mt-1 mb-0">
+                            {{ user.emergency_contact or "Not Available" }}
+                        </h6>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="border rounded p-3">
+                        <small class="text-muted">Address</small>
+                        <h6 class="mt-1 mb-0">
+                            {{ user.address or "Not Available" }}
+                        </h6>
+                    </div>
+                </div>
+
+            </div>
+
+            {% endif %}
+
+
+
+            <!-- Receptionist Information -->
+
+            {% if user.role == "receptionist" %}
+
+            <hr class="my-5">
+
+            <h4 class="mb-4">
+                Receptionist Information
+            </h4>
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="border rounded p-3">
+
+                        <small class="text-muted">
+                            Employee ID
+                        </small>
+
+                        <h6 class="mt-1 mb-0">
+                            {{ user.employee_id }}
+                        </h6>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+
+            <div class="mt-5">
+
+                <h5 class="mb-3">
+                    Account Actions
+                </h5>
+
+                <a href="{{ url_for('admin.edit_user', user_id=user.user_id) }}" class="btn btn-primary">
+                    Edit User
+                </a>
+
+                {% if user.user_id != current_user.user_id %}
+                <form method="POST" action="{{ url_for('admin.delete_user', user_id=user.user_id) }}" class="d-inline"
+                    onsubmit="return confirm('Are you sure you want to delete this user? This action cannot be undone.');">
+                    <button type="submit" class="btn btn-danger ms-2">
+                        Delete User
+                    </button>
+                </form>
+                {% else %}
+                <button type="button" class="btn btn-secondary ms-2" disabled>
+                    Delete User
+                </button>
+                {% endif %}
+
+
+            </div>
+
+            {% endblock %}
