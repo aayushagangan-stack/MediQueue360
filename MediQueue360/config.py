@@ -20,7 +20,7 @@ class Config:
 
     MYSQL_PASSWORD = os.environ.get(
         "MYSQL_PASSWORD",
-        "root123"
+        "......"
     )
 
     MYSQL_DATABASE = os.environ.get(
